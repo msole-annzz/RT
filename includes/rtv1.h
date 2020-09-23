@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rtv1.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 16:36:43 by msole             #+#    #+#             */
-/*   Updated: 2020/08/12 17:19:37 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/23 18:07:43 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void		ft_getnorms_and_view (t_scene *scene, int i);
 double		ft_shine(t_scene *scene, int s, t_coord vl, t_light *light);
 double		ft_lights23(t_scene *scene, t_restr r, t_light *light, int s);
 void		ft_threads(t_scene *scene);
+// Dobavil function
+int			close_window(void *param);
 
 #endif

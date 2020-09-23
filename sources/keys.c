@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 16:48:27 by msole             #+#    #+#             */
-/*   Updated: 2020/08/12 17:01:59 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/23 18:06:46 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,16 @@ int		ft_legend(t_scene *scene)
 	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 130, 140, \
 	0xaaaaaa, "v - b / z");
 	return (0);
+}
+
+int		close_window(void *param)
+{
+	t_scene	*scene;
+
+	scene = (t_scene *)param;
+	// free_memory(paint);
+	mlx_destroy_window(scene->mlx.init, scene->mlx.win);
+	exit(0);
 }
 
 int		expose_hook(t_scene *scene)

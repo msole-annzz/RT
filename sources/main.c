@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 15:13:49 by msole             #+#    #+#             */
-/*   Updated: 2020/08/12 17:20:13 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/23 18:03:25 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		ft_hooks(t_scene *scene)
 {
 	mlx_hook(scene->mlx.win, 12, 0, expose_hook, scene);
 	mlx_hook(scene->mlx.win, 2, 0, scene_keys, scene);
+	mlx_hook(scene->mlx.win, 17, 0, close_window, scene);
 }
 
 int			main(int argc, char **argv)

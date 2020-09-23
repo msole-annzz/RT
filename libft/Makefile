@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msole <msole@student.42.fr>                +#+  +:+       +#+         #
+#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/12 11:28:03 by msole             #+#    #+#              #
-#    Updated: 2019/12/09 12:26:33 by msole            ###   ########.fr        #
+#    Updated: 2020/09/23 16:36:39 by wrhett           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,15 +82,15 @@ OB = $(SRCS:.c=.o)
 all:$(NAME)
 
 $(NAME):
-	gcc -c $(SRCS)
-	gcc libft.h -Wall -Wextra -Werror 
-	ar rc $(NAME) $(OB)
-	ranlib $(NAME)
+	@gcc -c $(SRCS)
+	@gcc libft.h -Wall -Wextra -Werror 
+	@ar rc $(NAME) $(OB)
+	@ranlib $(NAME)
 
 clean:
-	rm -f $(OB)
+	@rm -f $(OB)
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 re:fclean all	
 
 .PHONY: re clean fclean all
