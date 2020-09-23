@@ -1,0 +1,39 @@
+{
+ "camera"   :{"position":[1,0,0],
+           "direction":[0,0,0]
+            },
+ "lights": [
+
+         { "type":"ambient",
+           "position":[0,0,0],
+           "direction":[0,0,0],
+           "intensity":0.1
+         },
+         { "type":"sun",
+          "position":[0,0,0],
+          "direction":[1,50,1],
+          "intensity":0.9
+        }
+
+            ],
+ "objects":[
+              { "type":"plane",
+                "position":[0,-2,0],
+                "radius":0,
+                "color":[0,100,0],
+                "angle":0,
+                "normal":[1,1,0],
+                "specularity":10,
+                "reflection":0
+              },
+            { "type":"plane",
+              "position":[0,-2,0],
+              "radius":0,
+              "color":[0,50,0],
+              "angle":0,
+              "normal":[0,1,0],
+              "specularity":10,
+              "reflection":0
+            }
+          ]
+}
