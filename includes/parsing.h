@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 19:45:46 by msole             #+#    #+#             */
-/*   Updated: 2020/08/12 16:35:19 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/26 11:47:00 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,9 @@ int			int_parsing(char *str, int *index);
 */
 int			count_spaces(char *str);
 
+// DELETE ME
+void		check_parsing(t_scene *rt);
+
 #endif
+
+

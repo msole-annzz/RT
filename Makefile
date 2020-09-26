@@ -22,6 +22,7 @@ SRCS =  ./sources/main.c\
         ./sources/parsing/parsing_lights.c\
         ./sources/parsing/parsing_objects.c\
         ./sources/parsing/malloc_free.c\
+		./sources/parsing/check_parsing_DELETE_ME.c
 
 OB = $(SRCS:.c=.o)
 

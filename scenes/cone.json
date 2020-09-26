@@ -7,12 +7,14 @@
          { "type":"ambient",
            "position":[0,0,0],
            "direction":[0,0,0],
-           "intensity":0.1
+           "intensity":0.1,
+           "color":[75,150,150]
          },
          { "type":"sun",
           "position":[0,0,0],
           "direction":[3,3,-3],
-          "intensity":0.5
+          "intensity":0.5,
+          "color":[75,150,150]
         }
 
             ],
@@ -23,8 +25,12 @@
               "color":[75,150,150],
               "angle":0.5,
               "normal":[0,1,0],
+              "axis_angle":[0,1,6],
               "specularity":1000,
-              "reflection":0
+              "reflection":0,
+              "refraction": 15,
+              "high": -3
+
             },
             { "type":"plane",
               "position":[0,-2,0],
@@ -32,8 +38,11 @@
               "color":[0,100,0],
               "angle":0,
               "normal":[0,1,0],
+              "axis_angle":[258,6,-356596],
               "specularity":10,
-              "reflection":0
+              "reflection":0,
+              "refraction": 115.36,
+              "high": -1515
             }
           ]
 }

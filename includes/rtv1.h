@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 16:36:43 by msole             #+#    #+#             */
-/*   Updated: 2020/08/12 17:19:37 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/26 11:49:21 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "keys.h"
 # include "structs.h"
 # include "parsing.h"
+# include "stdio.h" // DELETE ME
 
 t_coord		ft_multkv(double k, t_coord v);
 double		ft_dotprod(t_coord v1, t_coord v2);
