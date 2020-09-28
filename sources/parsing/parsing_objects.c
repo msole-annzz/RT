@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 13:00:59 by msole             #+#    #+#             */
-/*   Updated: 2020/08/12 15:48:01 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/26 12:29:02 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ int		fill_objects_middle(char *str, int *index, t_scene *rt, int counter)
 		rt->object[rt->current_object]->reflection = double_parsing(str, index);
 		counter = counter + 1;
 	}
+	else if (find_quotes(str, index, "\"refraction\"\0"))
+	{
+		rt->object[rt->current_object]->refraction = double_parsing(str, index);
+		counter = counter + 1;
+	}
 	return (counter);
 }
 
@@ -67,11 +72,24 @@ int		fill_objects_end(char *str, int *index, t_scene *rt, int counter)
 		*index = *index + 1;
 		counter = counter + 1;
 	}
+	else if (find_quotes(str, index, "\"axis_angle\"\0"))
+	{
+		rt->object[rt->current_object]->axis_angle = \
+		parsing_coordinates(str, index);
+		*index = *index + 1;
+		counter = counter + 1;
+	}
 	else if (find_quotes(str, index, "\"specularity\"\0"))
 	{
 		rt->object[rt->current_object]->specular = double_parsing(str, index);
 		counter = counter + 1;
 	}
+	else if (find_quotes(str, index, "\"high\"\0"))
+	{
+		rt->object[rt->current_object]->high = double_parsing(str, index);
+		counter = counter + 1;
+	}
+
 	return (counter);
 }
 
@@ -89,7 +107,7 @@ int		fill_objects(char *str, int *index, t_scene *rt, int counter)
 		counter = fill_objects_middle(str, index, rt, counter);
 	}
 	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') ||\
-		(str[*index + 1] == 's'))
+		(str[*index + 1] == 's' || (str[*index + 1] == 'h')))
 		counter = fill_objects_end(str, index, rt, counter);
 	else
 		file_contents_error();
@@ -111,7 +129,7 @@ void	objects_parsing(char *str, int *index, t_scene *rt)
 	{
 		rt->current_object = n;
 		counter = fill_objects(str, index, rt, counter);
-		if (counter == 8)
+		if (counter == 11)
 		{
 			n++;
 			counter = 0;

@@ -6,7 +6,7 @@
 /*   By: msole <msole@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 19:46:15 by msole             #+#    #+#             */
-/*   Updated: 2020/09/23 12:55:27 by msole            ###   ########.fr       */
+/*   Updated: 2020/09/26 16:55:11 by msole            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct	s_object
 	t_coord		vectorperp; // хочется поменять на axis_obj
 	double		reflection;
 	double		refraction; //преломление
-	t_angle		axis_angle; // угол для нормали объекта, для удобства управления
+	t_coord		axis_angle; // угол для нормали объекта, для удобства управления
 	int			high; // высота объекта, для ограничений
 
 }				t_object;
@@ -123,10 +123,29 @@ typedef struct	s_trestr
 	double		tmax;
 }				t_restr;
 
+//is_press - 0/1 - key is/is not pressed
+typedef struct	s_new_x_y
+{
+	double			x;
+	double			y;
+}				t_new_x_y;
+
+typedef struct	s_mouse
+{
+	int			x;
+	int			y;
+	//t_new_x_y 		new_x_y;
+//	int			new_y;
+	int			is_press;
+	int			num_obj;
+}				t_mouse;
+
 typedef struct	s_scene
 {
 	t_mlx		mlx;
+	t_mlx		legend;
 	t_img		image;
+	t_img		legend_image;
 	t_camera	camera;
 	t_object	**object;
 	t_light		**lights;
@@ -141,6 +160,8 @@ typedef struct	s_scene
 	int			current_object;
 	int			n_lights;
 	int			n_objects;
-}				t_scene;
+	int			color_schema; // 0 - standart; 1 - sepia;
+	t_mouse		*mouse;
+	}				t_scene;
 
 #endif

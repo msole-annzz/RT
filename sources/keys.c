@@ -6,7 +6,7 @@
 /*   By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 16:48:27 by msole             #+#    #+#             */
-/*   Updated: 2020/09/23 18:06:46 by wrhett           ###   ########.fr       */
+/*   Updated: 2020/09/28 12:14:00 by wrhett           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int		scene_keys(int keycode, t_scene *scene)
 	if (keycode == KEY_ESCAPE)
 	{
 		mlx_destroy_window(scene->mlx.init, scene->mlx.win);
+		mlx_destroy_window(scene->mlx.init, scene->legend.win);
+
 		exit(0);
 	}
 	if ((keycode == KEY_LEFTARROW) || (keycode == KEY_RIGHTARROW) || \
@@ -59,6 +61,10 @@ int		scene_keys(int keycode, t_scene *scene)
 		(keycode == KEY_ANSI_F) || (keycode == KEY_ANSI_G) || \
 		(keycode == KEY_ANSI_V) || (keycode == KEY_ANSI_B))
 		ft_rotate(keycode, scene);
+	if (keycode == KEY_ANSI_S)
+		scene->color_schema = 1;
+	if (keycode == KEY_ANSI_Q)
+		scene->color_schema = 0;
 	ft_threads(scene);
 	ft_legend(scene);
 	return (0);
@@ -66,18 +72,18 @@ int		scene_keys(int keycode, t_scene *scene)
 
 int		ft_legend(t_scene *scene)
 {
-	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 300, 20, \
+	mlx_string_put(scene->mlx.init, scene->legend.win, 10, 20, \
 	0xaaaaaa, "Camera position: x - < / >");
-	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 130, 40, \
+	mlx_string_put(scene->mlx.init, scene->legend.win, 10, 40, \
 	0xaaaaaa, "y - ^ / v");
-	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 130, 60, \
+	mlx_string_put(scene->mlx.init, scene->legend.win, 10, 60, \
 	0xaaaaaa, "z - a / z");
-	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 300, 100, \
+	mlx_string_put(scene->mlx.init, scene->legend.win, 10, 100, \
 	0xaaaaaa, "Rotation:        x - f / g");
-	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 130, 120, \
+	mlx_string_put(scene->mlx.init, scene->legend.win, 10, 120, \
 	0xaaaaaa, "y - r / t");
-	mlx_string_put(scene->mlx.init, scene->mlx.win, WIN_WIDTH - 130, 140, \
-	0xaaaaaa, "v - b / z");
+	mlx_string_put(scene->mlx.init, scene->legend.win, 10, 140, \
+	0xaaaaaa, "z - v / b");
 	return (0);
 }
 
