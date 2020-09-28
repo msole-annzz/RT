@@ -1,5 +1,5 @@
 
-#include "../../includes/rtv1.h"
+#include "../../includes/rt.h"
 
 void		check_parsing(t_scene *rt)
 {

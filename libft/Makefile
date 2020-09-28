@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wrhett <wrhett@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: msole <msole@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/12 11:28:03 by msole             #+#    #+#              #
-#    Updated: 2020/09/23 16:36:39 by wrhett           ###   ########.fr        #
+#    Updated: 2020/09/28 12:46:43 by msole            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRCS = ft_atoi.c\
+SRC = ft_atoi.c\
 		ft_bzero.c\
 		ft_isalnum.c\
 		ft_isalpha.c\
@@ -76,21 +76,28 @@ SRCS = ft_atoi.c\
 		ft_lstiter.c\
 		ft_lstmap.c\
 		get_next_line.c\
-		
-OB = $(SRCS:.c=.o)
 
-all:$(NAME)
+OBJECTS = $(patsubst %.c, %.o, $(SRC))
 
-$(NAME):
-	@gcc -c $(SRCS)
-	@gcc libft.h -Wall -Wextra -Werror 
-	@ar rc $(NAME) $(OB)
-	@ranlib $(NAME)
+HEADER = libft.h
+
+FLAGS = -Wall -Wextra -Werror
+
+all:	$(NAME)
+
+$(OBJECTS): %.o: %.c $(HEADER)
+		@gcc $(FLAGS) -o $@ -c $<
+		@echo "⏩\c"
+
+$(NAME): $(OBJECTS)
+		@ar rc $@ $^
+		@ranlib $(NAME)
+		@echo "\n\033[33m$(NAME) file:\033[32m was created\033[0m"
 
 clean:
-	@rm -f $(OB)
-fclean: clean
-	@rm -f $(NAME)
-re:fclean all	
+		@/bin/rm -f $(OBJECTS)
 
-.PHONY: re clean fclean all
+fclean: clean
+		@/bin/rm -f $(NAME)
+
+re: fclean all

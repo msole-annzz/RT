@@ -24,6 +24,7 @@ SRCS =  main.c\
 		sources/parsing/parsing_lights.c\
 		sources/parsing/parsing_objects.c\
 		sources/parsing/malloc_free.c\
+		sources/parsing/check_parsing_DELETE_ME.c
 
 SRC_FILE = $(notdir $(SRCS))
 
@@ -36,7 +37,7 @@ FLAG = -Wall -Wextra -Werror
 INCLUDES = -I $(HEADER_DIR) -I $(LIBFT_PATH)
 
 HEADER_DIR = ./includes/
-HEADER_LIST = rtv1.h keys.h structs.h parsing.h
+HEADER_LIST = rt.h keys.h structs.h parsing.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 LIBFT = libft/libft.a
