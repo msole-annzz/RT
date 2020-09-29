@@ -1,0 +1,97 @@
+{
+ "camera"   :{"position":[0,0,0],
+           "direction":[0,0,0]
+            },
+ "lights": [
+
+         { "type":"ambient",
+           "position":[0,0,0],
+           "direction":[0,0,0],
+           "intensity":0.1,
+           "color":[75,150,150]
+         },
+         { "type":"sun",
+          "position":[0,0,0],
+          "direction":[-1,50,-1],
+          "intensity":0.9,
+          "color":[75,150,150]
+        }
+        ,
+        { "type":"lamp",
+          "position":[3,1,-3],
+          "direction":[1,50,1],
+          "intensity":0.1,
+          "color":[75,150,150]
+        },
+        { "type":"lamp",
+          "position":[-3,1,-3],
+          "direction":[1,50,1],
+          "intensity":0.4,
+          "color":[75,150,150]
+        }
+            ],
+ "objects":[
+            { "type":"sphere",
+              "position":[1.5,1,4],
+              "radius":0.5,
+              "color":[150,150,150],
+              "angle":0,
+              "normal":[0,0,0],
+              "axis_angle":[0,1,6],
+              "specularity":1000,
+              "reflection":0,
+              "refraction": 15,
+              "high": -3
+            },
+            { "type":"sphere",
+              "position":[-1.5,1,4],
+              "radius":0.5,
+              "color":[0,0,165],
+              "angle":0,
+              "normal":[0,0,0],
+              "axis_angle":[0,1,6],
+              "specularity":1000,
+              "reflection":0,
+              "refraction": 15,
+              "high": -3
+            },
+            { "type":"sphere",
+              "position":[0,0,4],
+              "radius":0.5,
+              "color":[100,0,0],
+              "angle":0,
+              "normal":[0,0,0],
+              "axis_angle":[0,1,6],
+              "specularity":1000,
+              "reflection":0,
+              "refraction": 15,
+              "high": -3
+            },
+
+            { "type":"plane",
+              "position":[0,-2,0],
+              "radius":0,
+              "color":[0,50,0],
+              "angle":0,
+              "normal":[0,1,0],
+              "axis_angle":[0,1,6],
+              "specularity":10,
+              "reflection":0,
+              "refraction": 15,
+              "high": -3
+            },
+
+            { "type":"plane",
+              "position":[0,0,10],
+              "radius":0,
+              "color":[0,0,120],
+              "angle":0,
+              "normal":[0,0,-1],
+              "axis_angle":[0,1,6],
+              "specularity":10,
+              "reflection":0,
+              "refraction": 15,
+              "high": -3
+            }
+          ]
+}

@@ -64,4 +64,11 @@ void		ft_threads(t_scene *scene);
 // Dobavil function
 int			close_window(void *param);
 
+/*
+**mouse.c
+*/
+int		ft_mouse(int mouse, int x, int y, t_scene *scene);
+int		ft_mouse_release(int mouse, int x, int y, t_scene *scene);
+int		ft_mouse_move(int x, int y, t_scene *scene);
+
 #endif
