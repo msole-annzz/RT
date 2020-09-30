@@ -2,6 +2,24 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef enum
+{
+	e_not,
+	e_sphere,
+	e_plane,
+	e_cylindr,
+	e_cone,
+	e_hemisphere,
+	e_ambient,
+	e_point,
+	e_direct,
+	e_caps,
+	e_body,
+	e_pull,
+	e_push,
+
+}	t_name;
+
 typedef struct	s_img
 {
 	char		*data;

@@ -43,16 +43,16 @@ int		parsing_object_type(char *str, int *index)
 	i = *index + 1;
 	*index = *index + 1;
 	if ((find_quotes(str, index, "\"sphere\"\0")))
-		return (rez = 1);
+		return (rez = e_sphere);
 	*index = i;
 	if ((find_quotes(str, index, "\"plane\"\0")))
-		return (rez = 2);
+		return (rez = e_plane);
 	*index = i;
 	if ((find_quotes(str, index, "\"cylinder\"\0")))
-		return (rez = 3);
+		return (rez = e_cylindr);
 	*index = i;
 	if ((find_quotes(str, index, "\"cone\"\0")))
-		return (rez = 4);
+		return (rez = e_cone);
 	return (rez);
 }
 

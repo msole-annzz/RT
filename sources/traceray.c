@@ -79,14 +79,14 @@ void	ft_getnorm4(t_scene *scene, int i)
 
 void	ft_getnorms_and_view(t_scene *scene, int i)
 {
-	if (scene->object[i]->type == 1)
+	if (scene->object[i]->type == e_sphere)
 		scene->cur_prop.normal = ft_substrv(scene->cur_prop.p, \
 		scene->object[i]->center);
-	if (scene->object[i]->type == 2)
+	if (scene->object[i]->type == e_plane)
 		scene->cur_prop.normal = scene->object[i]->vectorperp;
-	if (scene->object[i]->type == 3)
+	if (scene->object[i]->type == e_cylindr)
 		ft_getnorm3(scene, i);
-	if (scene->object[i]->type == 4)
+	if (scene->object[i]->type == e_cone)
 		ft_getnorm4(scene, i);
 	scene->cur_prop.normal = ft_multkv(1 / ft_lengthv(scene->cur_prop.normal), \
 	scene->cur_prop.normal);
