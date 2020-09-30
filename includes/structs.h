@@ -71,9 +71,9 @@ typedef struct	s_camera
 
 typedef struct	s_color
 {
-	char		r;
-	char		g;
-	char		b;
+	int		r;
+	int		g;
+	int		b;
 }				t_color;
 
 typedef struct	s_object

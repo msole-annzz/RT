@@ -4,6 +4,7 @@ CC = gcc -g
 
 SRCS =  main.c\
 		keys.c\
+		mouse.c\
 		vector_operations.c\
 		rotation.c\
 		figures.c\
