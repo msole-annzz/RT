@@ -30,6 +30,14 @@ t_corsol	ft_intersectcone(t_scene *scene, t_coord o, t_coord c, t_restr r)
 	return (ft_getcorrectsolution(t, r, scene->current_object));
 }
 
+t_corsol	ft_intersectparaboloid(t_scene *scene, t_coord o, t_coord c, t_restr r)
+{
+	t_quadreq t;
+
+	t = ft_paraboloid(o, c, *scene->object[scene->current_object]);
+	return (ft_getcorrectsolution(t, r, scene->current_object));
+}
+
 t_corsol	ft_intersectplane(t_scene *scene, t_coord o, t_coord c, t_restr r)
 {
 	t_quadreq t;

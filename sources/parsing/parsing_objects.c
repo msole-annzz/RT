@@ -11,13 +11,16 @@ int		fill_objects_start(char *str, int *index, t_scene *rt, int counter)
 		if (str[*index] == '}')
 			*index = *index + 2;
 		counter++;
+		//printf("type %c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
 	else if (find_quotes(str, index, "\"position\"\0"))
 	{
+		//printf("%c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 		rt->object[rt->current_object]->center = \
 		parsing_coordinates(str, index);
 		counter++;
 		*index = *index + 1;
+		//printf("%c,%c,%c,%c,%c\n", str[*index],str[*index+1],str[*index+2],str[*index+3],str[*index+4]);
 	}
 	return (counter);
 }
@@ -78,6 +81,11 @@ int		fill_objects_end(char *str, int *index, t_scene *rt, int counter)
 		rt->object[rt->current_object]->high = double_parsing(str, index);
 		counter = counter + 1;
 	}
+	else if (find_quotes(str, index, "\"k_paraboloid\"\0"))
+	{
+		rt->object[rt->current_object]->k_paraboloid = double_parsing(str, index);
+		counter = counter + 1;
+	}
 
 	return (counter);
 }
@@ -89,17 +97,25 @@ int		fill_objects(char *str, int *index, t_scene *rt, int counter)
 	checker = counter;
 	if ((str[*index + 1] == 't') || (str[*index + 1] == 'p'))
 	{
+		//printf("t or p\n");
 		counter = fill_objects_start(str, index, rt, counter);
 	}
 	else if ((str[*index + 1] == 'c') || (str[*index + 1] == 'r'))
 	{
+		//printf("c or r\n");
 		counter = fill_objects_middle(str, index, rt, counter);
 	}
 	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') ||\
-		(str[*index + 1] == 's' || (str[*index + 1] == 'h')))
+		(str[*index + 1] == 's' || (str[*index + 1] == 'h') || (str[*index + 1] == 'k')))
+		{
 		counter = fill_objects_end(str, index, rt, counter);
+		//printf("other\n");
+		}
 	else
+	{
+		//printf("error");
 		file_contents_error();
+	}
 	if (counter != checker + 1)
 		file_contents_error();
 	return (counter);
@@ -118,7 +134,7 @@ void	objects_parsing(char *str, int *index, t_scene *rt)
 	{
 		rt->current_object = n;
 		counter = fill_objects(str, index, rt, counter);
-		if (counter == 11)
+		if (counter == 12)
 		{
 			n++;
 			counter = 0;

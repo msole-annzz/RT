@@ -77,6 +77,34 @@ void	ft_getnorm4(t_scene *scene, int i)
 	scene->object[i]->vectorperp))));
 }
 
+
+void	ft_getnorm5(t_scene *scene, int i)
+{
+	double	m;
+
+	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), \
+	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
+	scene->object[i]->vectorperp));
+	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, scene->object[i]->center), ft_multkv((m + scene->object[i]->k_paraboloid), ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), scene->object[i]->vectorperp)));
+}
+
+void	ft_getnorm6(t_scene *scene, int i)// для тора
+{
+	double	k;
+	t_coord	a;
+	double	m;
+	double	koef;
+	k = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), \
+	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
+	scene->object[i]->vectorperp));
+	a = ft_substrv(scene->cur_prop.p, ft_multkv(k, ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
+	scene->object[i]->vectorperp)));
+	m = (scene->object[i]->tor.sr2 - k * k ) * (scene->object[i]->tor.sr2 - k * k );
+	koef = m / (scene->object[i]->big_tor_radius + m);
+	scene->cur_prop.normal = ft_substrv(scene->cur_prop.p, ft_substrv(a, ft_multkv(koef, ft_substrv(scene->object[i]->center, a))));
+
+}
+
 void	ft_getnorms_and_view(t_scene *scene, int i)
 {
 	if (scene->object[i]->type == e_sphere)
@@ -88,6 +116,12 @@ void	ft_getnorms_and_view(t_scene *scene, int i)
 		ft_getnorm3(scene, i);
 	if (scene->object[i]->type == e_cone)
 		ft_getnorm4(scene, i);
+	if (scene->object[i]->type == 5)
+		ft_getnorm5(scene, i);
+	/*if (scene->object[i]->type == 6)
+		ft_getnorm6(scene, i);
+
+*/
 	scene->cur_prop.normal = ft_multkv(1 / ft_lengthv(scene->cur_prop.normal), \
 	scene->cur_prop.normal);
 	scene->cur_prop.view = ft_multkv(-1, scene->cur_point);
