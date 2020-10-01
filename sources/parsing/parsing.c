@@ -44,10 +44,12 @@ void	check_normals(t_scene *rt)
 
 void	parsing_cont(char *str, int *index, t_scene *rt)
 {
+
 	if (find_quotes(str, index, "\"objects\"\0"))
 	{
 		*index += 1;
 		objects_parsing(str, index, rt);
+	//	printf("ob");
 	}
 	else
 		file_contents_error();
@@ -65,6 +67,7 @@ void	parsing(char *str, t_scene *rt)
 	{
 		*index += 2;
 		camera_parsing(str, index, rt);
+		//printf("cam");
 	}
 	else
 		file_contents_error();
@@ -72,6 +75,7 @@ void	parsing(char *str, t_scene *rt)
 	{
 		*index += 1;
 		lights_parsing(str, index, rt);
+		//printf("li");
 	}
 	else
 		file_contents_error();

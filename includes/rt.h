@@ -36,6 +36,7 @@ t_quadreq	ft_sfera(t_coord origin, t_coord direction, t_object object);
 t_quadreq	ft_cylinder(t_coord origin, t_coord direction, t_object object);
 t_quadreq	ft_cone(t_coord origin, t_coord direction, t_object object);
 t_quadreq	ft_plane(t_coord origin, t_coord direction, t_object object);
+t_quadreq	ft_paraboloid(t_coord origin, t_coord direction, t_object object);
 t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r);
 int			scene_keys(int keycode, t_scene *scene);
 int			expose_hook(t_scene *scene);
@@ -46,6 +47,7 @@ t_corsol	ft_intersectcylinder(t_scene *scene, t_coord o, t_coord c, \
 								t_restr r);
 t_corsol	ft_intersectcone(t_scene *scene, t_coord o, t_coord c, t_restr r);
 t_corsol	ft_intersectplane(t_scene *scene, t_coord o, t_coord c, t_restr r);
+t_corsol	ft_intersectparaboloid(t_scene *scene, t_coord o, t_coord c, t_restr r);
 void		*ft_traceray(void *thread_data);
 void		ft_intersect(t_scene *scene);
 double		ft_light(t_scene *scene, int s);

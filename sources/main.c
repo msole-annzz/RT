@@ -37,6 +37,8 @@ t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
 			t_temp = ft_intersectcylinder(scene, o, c, r);
 		if (scene->object[scene->current_object]->type == 4)
 			t_temp = ft_intersectcone(scene, o, c, r);
+		if (scene->object[scene->current_object]->type == 5)
+			t_temp = ft_intersectparaboloid(scene, o, c, r);
 		if (((t_temp.issol == 1) && (t_temp.sol < t.sol)) || \
 		((t_temp.issol == 1) && (t.sol == 0)))
 			t = t_temp;

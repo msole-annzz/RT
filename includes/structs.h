@@ -58,6 +58,23 @@ typedef struct	s_color
 	int		b;
 }				t_color;
 
+typedef struct	s_torus
+{
+	double	a;
+	double	b;
+	double	c;
+	double	d;
+	double	e;
+	double		m;
+	double		n;
+	double		o;
+	double		p;
+	double		q;
+	double		sr2;//маленький радиус в квадрате
+	double		br2;//большой радиус в квадрате
+
+}				t_torus;
+
 typedef struct	s_object
 {
 	int			type;
@@ -66,12 +83,19 @@ typedef struct	s_object
 	t_color		color;
 	int			specular;
 	double		angle;
-	double		tang;
+	double		k_paraboloid;//коэффициент для построения парабалоида
 	t_coord		vectorperp; // хочется поменять на axis_obj
 	double		reflection;
 	double		refraction; //преломление
 	t_coord		axis_angle; // угол для нормали объекта, для удобства управления
 	int			high; // высота объекта, для ограничений
+	double		small_tor_radius;// радус шарика, который крутиться вокруг оси
+	double		big_tor_radius;//радиус окружности вращения
+
+
+	double		tang;// тангенс angle, не парсится, а рассчитывается
+	t_torus		tor; // структура для рассчета тора, не парсится
+
 
 }				t_object;
 

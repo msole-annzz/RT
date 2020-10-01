@@ -53,6 +53,9 @@ int		parsing_object_type(char *str, int *index)
 	*index = i;
 	if ((find_quotes(str, index, "\"cone\"\0")))
 		return (rez = 4);
+	if ((find_quotes(str, index, "\"paraboloid\"\0")))
+		return (rez = 5);
+	*index = i;
 	return (rez);
 }
 
