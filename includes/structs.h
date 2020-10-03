@@ -4,7 +4,7 @@
 
 typedef struct	s_img
 {
-	char		*data;
+	int		*data;
 	int			size;
 	int			endian;
 	int			bpp;

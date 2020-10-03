@@ -15,7 +15,8 @@ int		ft_mouse(int mouse, int x, int y, t_scene *scene)
 		r.tmin = 1;
 		r.tmax = 100000;
 		t = ft_findnearobj(scene, scene->camera.place, scene->cur_point, r);
-		scene->mouse->num_obj = t.kobj;
+		if (t.issol == 1)
+			scene->mouse->num_obj = t.kobj;
 	}
 	return (0);
 }

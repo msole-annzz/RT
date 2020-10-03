@@ -4,9 +4,9 @@
 void		ft_init_scene(t_scene *scene)
 {
 	scene->d = 1;
-	scene->bkg_color.r = 0xff;
-	scene->bkg_color.g = 0xff;
-	scene->bkg_color.b = 0xff;
+	scene->bkg_color.r = 0;
+	scene->bkg_color.g = 0;
+	scene->bkg_color.b = 0;
 	scene->angle.x = 0;
 	scene->angle.y = 0;
 	scene->angle.z = 0;
@@ -104,9 +104,9 @@ int			main(int argc, char **argv)
 				WIN_HEIGHT, "Legend");
 	scene->mlx.img = mlx_new_image(scene->mlx.init, WIN_WIDTH, WIN_HEIGHT);
 	scene->legend.img = mlx_new_image(scene->mlx.init, WIN_WIDTH/2, WIN_HEIGHT);
-	scene->image.data = mlx_get_data_addr(scene->mlx.img, &scene->image.bpp,\
+	scene->image.data = (int *)mlx_get_data_addr(scene->mlx.img, &scene->image.bpp,\
 			&scene->image.size, &scene->image.endian);
-	scene->legend_image.data = mlx_get_data_addr(scene->legend.img, &scene->legend_image.bpp, &scene->legend_image.size, &scene->legend_image.endian);
+	scene->legend_image.data = (int *) mlx_get_data_addr(scene->legend.img, &scene->legend_image.bpp, &scene->legend_image.size, &scene->legend_image.endian);
 	ft_init_scene(scene);
 	ft_threads(scene);
 	ft_hooks(scene);
