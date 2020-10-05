@@ -1,7 +1,7 @@
 
 #include "../includes/rt.h"
 
-t_coord	ft_multkv(double k, t_coord v)
+t_coord	ft_mult_num_vector(double k, t_coord v)
 {
 	t_coord	m;
 
@@ -21,7 +21,7 @@ double	ft_lengthv(t_coord v)
 	return (sqrt(ft_dotprod(v, v)));
 }
 
-t_coord	ft_addv(t_coord v1, t_coord v2)
+t_coord	ft_add_vector(t_coord v1, t_coord v2)
 {
 	t_coord	t;
 
@@ -39,4 +39,21 @@ t_coord	ft_substrv(t_coord v1, t_coord v2)
 	t.y = v1.y - v2.y;
 	t.z = v1.z - v2.z;
 	return (t);
+}
+
+double	ft_modul_vector(t_coord v)
+{
+	return (sqrt(v.x * v.x + v.y * v.y + v.z * v.z));
+}
+
+t_coord 	ft_norm_vector(t_coord vector)
+{
+	double		modul_v;
+
+	modul_v = ft_modul_vector(vector);
+	vector.x /= modul_v;
+	vector.y /= modul_v;
+	vector.z /= modul_v;
+
+	return (vector);
 }

@@ -36,7 +36,7 @@ void	ft_intersect(t_scene *scene)
 	t = ft_findnearobj(scene, scene->camera.place, scene->cur_point, r);
 	if (t.issol == 1)
 	{
-		scene->cur_prop.p = ft_addv(scene->camera.place, ft_multkv(t.sol, \
+		scene->cur_prop.p = ft_add_vector(scene->camera.place, ft_mult_num_vector(t.sol, \
 		scene->cur_point));
 		ft_getnorms_and_view(scene, t.kobj);
 		deep = 0;
@@ -46,46 +46,43 @@ void	ft_intersect(t_scene *scene)
 	}
 }
 
-void	ft_getnorm3(t_scene *scene, int i)
+void	ft_getnorm_cylinder(t_scene *scene, int i)
 {
 	double m;
+	t_coord v;
 
-	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), \
-	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
-	scene->object[i]->vectorperp));
-	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, \
-	scene->object[i]->center), ft_multkv(m, ft_multkv(1 / \
-	ft_lengthv(scene->object[i]->vectorperp), \
-	scene->object[i]->vectorperp)));
+	v = ft_mult_num_vector(1 / ft_lengthv(scene->object[i]->vectorperp), scene->object[i]->vectorperp);
+	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), v);
+	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, scene->object[i]->center), ft_mult_num_vector(m, v));
+	scene->cur_prop.normal = ft_norm_vector(scene->cur_prop.normal);
+
 }
 
-void	ft_getnorm4(t_scene *scene, int i)
+void	ft_getnorm_cone(t_scene *scene, int i)
 {
 	double	m;
 	double	k;
 	t_coord	a;
+	t_coord v;
 
-	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), \
-	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
-	scene->object[i]->vectorperp));
-	a = ft_addv(scene->object[i]->center, ft_multkv(m, ft_multkv(1 / \
-	ft_lengthv(scene->object[i]->vectorperp), scene->object[i]->vectorperp)));
+	v = ft_mult_num_vector(1 / ft_lengthv(scene->object[i]->vectorperp), scene->object[i]->vectorperp);
+	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), v);
+	a = ft_add_vector(scene->object[i]->center, ft_mult_num_vector(m, v));
 	k = ft_lengthv(ft_substrv(scene->cur_prop.p, a)) / m;
-	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, \
-	scene->object[i]->center), ft_multkv((1 + k * k), ft_multkv(m, \
-	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
-	scene->object[i]->vectorperp))));
+	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, scene->object[i]->center), ft_mult_num_vector((1 + k * k), ft_mult_num_vector(m, v)));
+	scene->cur_prop.normal = ft_norm_vector(scene->cur_prop.normal);
 }
 
 
-void	ft_getnorm5(t_scene *scene, int i)
+void	ft_getnorm_paraboloid(t_scene *scene, int i)
 {
 	double	m;
+	t_coord v;
 
-	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), \
-	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
-	scene->object[i]->vectorperp));
-	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, scene->object[i]->center), ft_multkv((m + scene->object[i]->k_paraboloid), ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), scene->object[i]->vectorperp)));
+	v = ft_mult_num_vector(1 / ft_lengthv(scene->object[i]->vectorperp), scene->object[i]->vectorperp);
+	m = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), v);
+	scene->cur_prop.normal = ft_substrv(ft_substrv(scene->cur_prop.p, scene->object[i]->center), ft_mult_num_vector((m + scene->object[i]->k_paraboloid), v));
+	scene->cur_prop.normal = ft_norm_vector(scene->cur_prop.normal);
 }
 
 void	ft_getnorm6(t_scene *scene, int i)// для тора
@@ -95,13 +92,13 @@ void	ft_getnorm6(t_scene *scene, int i)// для тора
 	double	m;
 	double	koef;
 	k = ft_dotprod(ft_substrv(scene->cur_prop.p, scene->object[i]->center), \
-	ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
+	ft_mult_num_vector(1 / ft_lengthv(scene->object[i]->vectorperp), \
 	scene->object[i]->vectorperp));
-	a = ft_substrv(scene->cur_prop.p, ft_multkv(k, ft_multkv(1 / ft_lengthv(scene->object[i]->vectorperp), \
+	a = ft_substrv(scene->cur_prop.p, ft_mult_num_vector(k, ft_mult_num_vector(1 / ft_lengthv(scene->object[i]->vectorperp), \
 	scene->object[i]->vectorperp)));
 	m = (scene->object[i]->tor.sr2 - k * k ) * (scene->object[i]->tor.sr2 - k * k );
 	koef = m / (scene->object[i]->big_tor_radius + m);
-	scene->cur_prop.normal = ft_substrv(scene->cur_prop.p, ft_substrv(a, ft_multkv(koef, ft_substrv(scene->object[i]->center, a))));
+	scene->cur_prop.normal = ft_substrv(scene->cur_prop.p, ft_substrv(a, ft_mult_num_vector(koef, ft_substrv(scene->object[i]->center, a))));
 
 }
 
@@ -113,16 +110,16 @@ void	ft_getnorms_and_view(t_scene *scene, int i)
 	if (scene->object[i]->type == e_plane)
 		scene->cur_prop.normal = scene->object[i]->vectorperp;
 	if (scene->object[i]->type == e_cylindr)
-		ft_getnorm3(scene, i);
+		ft_getnorm_cylinder(scene, i);
 	if (scene->object[i]->type == e_cone)
-		ft_getnorm4(scene, i);
-	if (scene->object[i]->type == 5)
-		ft_getnorm5(scene, i);
+		ft_getnorm_cone(scene, i);
+	if (scene->object[i]->type == e_paraboloid)
+		ft_getnorm_paraboloid(scene, i);
 	/*if (scene->object[i]->type == 6)
 		ft_getnorm6(scene, i);
 
 */
-	scene->cur_prop.normal = ft_multkv(1 / ft_lengthv(scene->cur_prop.normal), \
+	scene->cur_prop.normal = ft_mult_num_vector(1 / ft_lengthv(scene->cur_prop.normal), \
 	scene->cur_prop.normal);
-	scene->cur_prop.view = ft_multkv(-1, scene->cur_point);
+	scene->cur_prop.view = ft_mult_num_vector(-1, scene->cur_point);
 }

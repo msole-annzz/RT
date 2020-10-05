@@ -25,7 +25,7 @@ t_quadreq	ft_cylinder(t_coord origin, t_coord direction, t_object object)
 
 	oc = ft_substrv(origin, object.center);
 	normal = object.vectorperp;
-	normal = ft_multkv(1 / ft_lengthv(normal), normal);
+	normal = ft_mult_num_vector(1 / ft_lengthv(normal), normal);
 	a = ft_dotprod(direction, direction) - ft_dotprod(direction, normal) *\
 		ft_dotprod(direction, normal);
 	b = 2 * (ft_dotprod(oc, direction) - ft_dotprod(direction, normal) *\
@@ -45,7 +45,7 @@ t_quadreq	ft_cone(t_coord origin, t_coord direction, t_object object)
 
 	oc = ft_substrv(origin, object.center);
 	normal = object.vectorperp;
-	normal = ft_multkv(1 / ft_lengthv(normal), normal);
+	normal = ft_mult_num_vector(1 / ft_lengthv(normal), normal);
 	object.tang = tan(object.angle / 2);
 	a = ft_dotprod(direction, direction) - (1 + \
 		object.tang * object.tang) *\
@@ -68,11 +68,11 @@ t_quadreq	ft_paraboloid(t_coord origin, t_coord direction, t_object object)
 
 	oc = ft_substrv(origin, object.center);
 	normal = object.vectorperp;
-	normal = ft_multkv(1 / ft_lengthv(normal), normal);
+	normal = ft_mult_num_vector(1 / ft_lengthv(normal), normal);
 
 	a = ft_dotprod(direction, direction) - (ft_dotprod(direction, normal) * ft_dotprod(direction, normal));
-	b = 2 * (ft_dotprod(oc, direction) - ft_dotprod(direction, normal) * (ft_dotprod(oc, normal) + 2 * object.k_paraboloid));
-	c = ft_dotprod(oc, oc) - ft_dotprod(oc, normal) * (ft_dotprod(oc, normal) + 4 * object.k_paraboloid);
+	b = 2 * (ft_dotprod(oc, direction) - (ft_dotprod(direction, normal) * (ft_dotprod(oc, normal) + 2 * object.k_paraboloid)));
+	c = ft_dotprod(oc, oc) - (ft_dotprod(oc, normal) * (ft_dotprod(oc, normal) + 4 * object.k_paraboloid));
 	return (ft_quadrsolution(a, b, c));
 }
 /*
@@ -84,7 +84,7 @@ t_quadreq	ft_torus(t_coord origin, t_coord direction, t_object object)
 
 	oc = ft_substrv(origin, object.center);
 	normal = object.vectorperp;
-	normal = ft_multkv(1 / ft_lengthv(normal), normal);
+	normal = ft_mult_num_vector(1 / ft_lengthv(normal), normal);
 	object.tor.m = ft_dotprod(direction, direction);
 	object.tor.n = ft_dotprod(direction, oc);
 	object.tor.o = ft_dotprod(oc, oc);

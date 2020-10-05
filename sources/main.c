@@ -29,16 +29,16 @@ t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
 	t.sol = 0;
 	while (scene->current_object < scene->n_objects)
 	{
-		if (scene->object[scene->current_object]->type == 1)
-			t_temp = ft_intersectsfera(scene, o, c, r);
-		if (scene->object[scene->current_object]->type == 2)
-			t_temp = ft_intersectplane(scene, o, c, r);
-		if (scene->object[scene->current_object]->type == 3)
-			t_temp = ft_intersectcylinder(scene, o, c, r);
-		if (scene->object[scene->current_object]->type == 4)
-			t_temp = ft_intersectcone(scene, o, c, r);
-		if (scene->object[scene->current_object]->type == 5)
-			t_temp = ft_intersectparaboloid(scene, o, c, r);
+		if (scene->object[scene->current_object]->type == e_sphere)
+			t_temp = ft_intersect_sfera(scene, o, c, r);
+		if (scene->object[scene->current_object]->type == e_plane)
+			t_temp = ft_intersect_plane(scene, o, c, r);
+		if (scene->object[scene->current_object]->type == e_cylindr)
+			t_temp = ft_intersect_cylinder(scene, o, c, r);
+		if (scene->object[scene->current_object]->type == e_cone)
+			t_temp = ft_intersect_cone(scene, o, c, r);
+		if (scene->object[scene->current_object]->type == e_paraboloid)
+			t_temp = ft_intersect_paraboloid(scene, o, c, r);
 		if (((t_temp.issol == 1) && (t_temp.sol < t.sol)) || \
 		((t_temp.issol == 1) && (t.sol == 0)))
 			t = t_temp;

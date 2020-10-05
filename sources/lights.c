@@ -45,7 +45,7 @@ double	ft_lights23(t_scene *scene, t_restr r, t_light *light, int s)
 		r.tmax = 100000;
 	}
 	x = ft_findnearobj(scene, scene->cur_prop.p, vl, r);
-	med = ft_multkv(1 / ft_lengthv(scene->cur_prop.view), \
+	med = ft_mult_num_vector(1 / ft_lengthv(scene->cur_prop.view), \
 	scene->cur_prop.view);
 	if ((x.sol == 0) && (ft_dotprod(med, scene->cur_prop.normal) >= 0))
 		intense += ft_shine(scene, s, vl, light);
@@ -66,7 +66,7 @@ double	ft_shine(t_scene *scene, int s, t_coord vl, t_light *light)
 		(ft_lengthv(scene->cur_prop.normal) * ft_lengthv(vl));
 	if (s != -1)
 	{
-		r = ft_substrv(ft_multkv(2 * m, scene->cur_prop.normal), vl);
+		r = ft_substrv(ft_mult_num_vector(2 * m, scene->cur_prop.normal), vl);
 		rv = ft_dotprod(r, scene->cur_prop.view);
 		if (rv > 0)
 		{

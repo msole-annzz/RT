@@ -17,6 +17,7 @@ typedef enum
 	e_body,
 	e_pull,
 	e_push,
+	e_paraboloid,
 
 }	t_name;
 

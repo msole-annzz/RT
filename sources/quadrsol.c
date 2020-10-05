@@ -24,7 +24,7 @@ t_quadreq	ft_quadrsolution(double a, double b, double c)
 	return (eq);
 }
 
-t_corsol	ft_getcorrectsolution(t_quadreq t, t_restr r, int k)
+t_corsol	ft_get_correct_solution(t_quadreq t, t_restr r, int k)
 {
 	t_corsol	x;
 

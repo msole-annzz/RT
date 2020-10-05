@@ -23,11 +23,13 @@
 # include "parsing.h"
 # include "stdio.h" // DELETE ME
 
-t_coord		ft_multkv(double k, t_coord v);
+t_coord		ft_mult_num_vector(double k, t_coord v);
 double		ft_dotprod(t_coord v1, t_coord v2);
 double		ft_lengthv(t_coord v);
-t_coord		ft_addv(t_coord v1, t_coord v2);
+t_coord		ft_add_vector(t_coord v1, t_coord v2);
 t_coord		ft_substrv(t_coord v1, t_coord v2);
+double		ft_modul_vector(t_coord v);
+t_coord 	ft_norm_vector(t_coord vector);
 t_coord		ft_rotatex(t_angle angle, t_coord v);
 t_coord		ft_rotatey(t_angle angle, t_coord v);
 t_coord		ft_rotatez(t_angle angle, t_coord v);
@@ -42,12 +44,12 @@ int			scene_keys(int keycode, t_scene *scene);
 int			expose_hook(t_scene *scene);
 int			ft_legend(t_scene *scene);
 void		ft_threads(t_scene *scene);
-t_corsol	ft_intersectsfera(t_scene *scene, t_coord o, t_coord c, t_restr r);
-t_corsol	ft_intersectcylinder(t_scene *scene, t_coord o, t_coord c, \
+t_corsol	ft_intersect_sfera(t_scene *scene, t_coord o, t_coord c, t_restr r);
+t_corsol	ft_intersect_cylinder(t_scene *scene, t_coord o, t_coord c, \
 								t_restr r);
-t_corsol	ft_intersectcone(t_scene *scene, t_coord o, t_coord c, t_restr r);
-t_corsol	ft_intersectplane(t_scene *scene, t_coord o, t_coord c, t_restr r);
-t_corsol	ft_intersectparaboloid(t_scene *scene, t_coord o, t_coord c, t_restr r);
+t_corsol	ft_intersect_cone(t_scene *scene, t_coord o, t_coord c, t_restr r);
+t_corsol	ft_intersect_plane(t_scene *scene, t_coord o, t_coord c, t_restr r);
+t_corsol	ft_intersect_paraboloid(t_scene *scene, t_coord o, t_coord c, t_restr r);
 void		*ft_traceray(void *thread_data);
 void		ft_intersect(t_scene *scene);
 double		ft_light(t_scene *scene, int s);
@@ -55,10 +57,10 @@ void		ft_put_pixel(t_scene *scene, int i, int j);
 void		ft_changecolor(t_scene *scene, t_color color, double deep);
 void		ft_initcolor(t_scene *scene);
 t_quadreq	ft_quadrsolution(double a, double b, double c);
-t_corsol	ft_getcorrectsolution(t_quadreq t, t_restr r, int k);
+t_corsol	ft_get_correct_solution(t_quadreq t, t_restr r, int k);
 void		ft_conv2to3(t_scene *scene, int x, int y);
-void		ft_getnorm3(t_scene *scene, int i);
-void		ft_getnorm4(t_scene *scene, int i);
+void		ft_getnorm_cylinder (t_scene *scene, int i);
+void		ft_getnorm_cone(t_scene *scene, int i);
 void		ft_getnorms_and_view (t_scene *scene, int i);
 double		ft_shine(t_scene *scene, int s, t_coord vl, t_light *light);
 double		ft_lights23(t_scene *scene, t_restr r, t_light *light, int s);

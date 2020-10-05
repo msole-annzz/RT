@@ -73,8 +73,8 @@ void    ft_put_pixel(t_scene *scene, int i, int j)
 	}
     if (scene->color_schema == 1)
       sepia(scene, p);
-	if (scene->color_schema == 2)
-      anaglyph (scene, p);
+	//if (scene->color_schema == 2)
+      //anaglyph (scene, p);
 
 }
 
