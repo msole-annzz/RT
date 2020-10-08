@@ -23,10 +23,11 @@ typedef enum
 
 typedef struct	s_img
 {
-	int		*data;
+	int			*data;
 	int			size;
 	int			endian;
 	int			bpp;
+	int			*anaglyph_data;
 }				t_img;
 
 typedef struct	s_mlx
@@ -34,6 +35,7 @@ typedef struct	s_mlx
 	void		*init;
 	void		*win;
 	void		*img;
+	void		*anaglyph_img;
 }				t_mlx;
 
 typedef struct	s_quadreq
@@ -193,6 +195,7 @@ typedef struct	s_scene
 	int			n_lights;
 	int			n_objects;
 	int			color_schema; // 0 - standart; 1 - sepia;
+
 	t_mouse		*mouse;
 	}				t_scene;
 

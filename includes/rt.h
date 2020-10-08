@@ -17,7 +17,7 @@
 # include <math.h>
 # include <pthread.h>
 # include "../libft/libft.h"
-# include "mlx.h"
+# include "../minilibx/mlx.h"
 # include "keys.h"
 # include "structs.h"
 # include "parsing.h"
@@ -74,5 +74,7 @@ int			close_window(void *param);
 int		ft_mouse(int mouse, int x, int y, t_scene *scene);
 int		ft_mouse_release(int mouse, int x, int y, t_scene *scene);
 int		ft_mouse_move(int x, int y, t_scene *scene);
+
+void	anaglyph(t_scene *scene, int p1, int p2, int p);
 
 #endif

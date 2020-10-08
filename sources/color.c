@@ -27,6 +27,35 @@ void	sepia(t_scene *scene, int p)
 
 	scene->image.data[p] = ((rgb[0] << 16) | (rgb[1] << 8) | rgb[2]);
 }
+
+t_color int_to_rgb(int p)
+{
+	t_color c;
+
+	c.r = (p >> 16) & 0xFF;
+	c.g = (p >> 8) & 0xFF;
+	c.b = (p >> 16) & 0xFF;
+	return(c);
+}
+
+void	anaglyph(t_scene *scene, int p1, int p2, int p)
+{
+	t_color c1;
+	t_color c2;
+	t_color c;
+
+	c1 = int_to_rgb(scene->image.data[p1]);
+	c2 = int_to_rgb(scene->image.data[p2]);
+	c = int_to_rgb(scene->image.data[p]);
+
+	c.r = c1.r * 0.299 + c1.g * 0.587 + c1.b * 0.114;
+	c.g = 0;
+	c.b = c2.r * 0.299 + c2.g * 0.587 + c2.b * 0.114;
+
+	scene->image.anaglyph_data[p] = ((c.r << 16) | (c.g << 8) | c.b);
+}
+
+
 /*
 t_color	anaglyph(t_scene *scene, int p1, int p2, int p)
 {

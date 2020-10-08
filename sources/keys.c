@@ -50,6 +50,8 @@ int		scene_keys(int keycode, t_scene *scene)
 		(keycode == KEY_ANSI_F) || (keycode == KEY_ANSI_G) || \
 		(keycode == KEY_ANSI_V) || (keycode == KEY_ANSI_B))
 		ft_rotate(keycode, scene);
+	if (keycode == KEY_ANSI_P)
+		scene->color_schema = 2;
 	if (keycode == KEY_ANSI_S)
 		scene->color_schema = 1;
 	if (keycode == KEY_ANSI_Q)
