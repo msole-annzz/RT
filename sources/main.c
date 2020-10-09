@@ -103,9 +103,10 @@ int			main(int argc, char **argv)
 	scene->legend.win = mlx_new_window(scene->mlx.init, WIN_WIDTH/2, \
 				WIN_HEIGHT, "Legend");
 	scene->mlx.img = mlx_new_image(scene->mlx.init, WIN_WIDTH, WIN_HEIGHT);
+	scene->mlx.filtered_img = mlx_new_image(scene->mlx.init, WIN_WIDTH, WIN_HEIGHT);
 	scene->legend.img = mlx_new_image(scene->mlx.init, WIN_WIDTH/2, WIN_HEIGHT);
-	scene->image.data = (int *)mlx_get_data_addr(scene->mlx.img, &scene->image.bpp,\
-			&scene->image.size, &scene->image.endian);
+	scene->image.data = (int *)mlx_get_data_addr(scene->mlx.img, &scene->image.bpp,&scene->image.size, &scene->image.endian);
+	scene->image.filtered_data = (int *)mlx_get_data_addr(scene->mlx.filtered_img, &scene->image.bpp,&scene->image.size, &scene->image.endian);
 	scene->legend_image.data = (int *) mlx_get_data_addr(scene->legend.img, &scene->legend_image.bpp, &scene->legend_image.size, &scene->legend_image.endian);
 	ft_init_scene(scene);
 	ft_threads(scene);

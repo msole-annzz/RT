@@ -27,7 +27,7 @@ typedef struct	s_img
 	int			size;
 	int			endian;
 	int			bpp;
-	int			*anaglyph_data;
+	int			*filtered_data;
 }				t_img;
 
 typedef struct	s_mlx
@@ -35,7 +35,7 @@ typedef struct	s_mlx
 	void		*init;
 	void		*win;
 	void		*img;
-	void		*anaglyph_img;
+	void		*filtered_img;
 }				t_mlx;
 
 typedef struct	s_quadreq
@@ -179,7 +179,9 @@ typedef struct	s_scene
 	t_mlx		mlx;
 	t_mlx		legend;
 	t_img		image;
+	//t_img		filtered_image;
 	t_img		legend_image;
+	//t_img		anaglyph_image;
 	t_camera	camera;
 	t_object	**object;
 	t_light		**lights;

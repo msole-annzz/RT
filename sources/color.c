@@ -43,16 +43,24 @@ void	anaglyph(t_scene *scene, int p1, int p2, int p)
 	t_color c1;
 	t_color c2;
 	t_color c;
-
+	//printf("P= %d\n", p);
+	//printf("P1= %d\n", p1);
+	//printf("P2= %d\n", p2);
 	c1 = int_to_rgb(scene->image.data[p1]);
 	c2 = int_to_rgb(scene->image.data[p2]);
 	c = int_to_rgb(scene->image.data[p]);
 
+//printf("c= %d\n", c.r);
+////	printf("c1= %d\n", c1.r);
+	//printf("c2= %d\n", c2.r);
 	c.r = c1.r * 0.299 + c1.g * 0.587 + c1.b * 0.114;
 	c.g = 0;
 	c.b = c2.r * 0.299 + c2.g * 0.587 + c2.b * 0.114;
 
-	scene->image.anaglyph_data[p] = ((c.r << 16) | (c.g << 8) | c.b);
+	//scene->image.data[p] = ((c.r << 16) | (c.g << 8) | c.b);
+
+	scene->image.filtered_data[p] = ((c.r << 16) | (c.g << 8) | c.b);
+//	printf("P= %d\n", scene->image.filtered_data[p]);
 }
 
 

@@ -28,14 +28,18 @@ int		ft_mouse_release(int mouse, int x, int y, t_scene *scene)
 	t_new_x_y old;
 	double delta;
 
-	delta = scene->object[scene->mouse->num_obj]->center.z + scene->d;
+	//delta = scene->object[scene->mouse->num_obj]->center.z + scene->d;
+	delta = - scene->camera.place.z + scene->d;
 	mlx_clear_window(scene->mlx.init, scene->mlx.win);
 	old.x = scene->mouse->x * (double)VIEW_WIDTH / WIN_WIDTH;
 	old.y = -scene->mouse->y * (double)VIEW_HEIGHT / WIN_HEIGHT;
 	new.x = x * (double)VIEW_WIDTH / WIN_WIDTH;
 	new.y = -y * (double)VIEW_HEIGHT / WIN_HEIGHT;
-	scene->object[scene->mouse->num_obj]->center.x = scene->object[scene->mouse->num_obj]->center.x - old.x * delta + new.x * delta;
-	scene->object[scene->mouse->num_obj]->center.y = scene->object[scene->mouse->num_obj]->center.y - old.y * delta + new.y * delta;
+	scene->object[scene->mouse->num_obj]->center.x =  new.x * delta;
+	scene->object[scene->mouse->num_obj]->center.y = new.y * delta;
+	
+	//scene->object[scene->mouse->num_obj]->center.x = scene->object[scene->mouse->num_obj]->center.x - old.x * delta + new.x * delta;
+	//scene->object[scene->mouse->num_obj]->center.y = scene->object[scene->mouse->num_obj]->center.y - old.y * delta + new.y * delta;
 	ft_threads(scene);
 	return (0);
 }
