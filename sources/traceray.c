@@ -30,6 +30,7 @@ void	ft_intersect(t_scene *scene)
 	t_corsol	t;
 	double		deep;
 	t_restr		r;
+	t_color color_light;
 
 	r.tmin = 1;
 	r.tmax = 100000;
@@ -44,6 +45,14 @@ void	ft_intersect(t_scene *scene)
 			deep = ft_light(scene, scene->object[t.kobj]->specular);
 		ft_changecolor(scene, scene->object[t.kobj]->color, deep);
 	}
+	/*else
+	{
+
+		color_light = add_light_color(scene, scene->camera.place, scene->cur_point);
+
+		//    scene->cur_prop.color = color_light;
+	}
+*/
 }
 
 void	ft_getnorm_cylinder(t_scene *scene, int i)

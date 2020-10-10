@@ -76,3 +76,35 @@ double	ft_shine(t_scene *scene, int s, t_coord vl, t_light *light)
 	}
 	return (intense);
 }
+
+t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
+{
+	t_coord d; //p
+	t_coord m;
+	t_color color;
+	int n;
+	double t;
+	double R = 2;
+
+	//n = scene->n_lights - 1;
+
+	//d = ft_substrv(o, c);
+
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	//while (n < scene->n_lights)
+	//{
+/*		m = ft_substrv(o, scene->lights[n]->position);
+		t = 1/ft_modul_vector(d) * ft_modul_vector(vector_mult(m, d));
+		if (t < R) //R = радиус для сферы по формулам из чата;
+		{
+			color.r += scene->lights[n]->color.r / (1 + t*t);// добавть в парсин цвет света
+			color.b += scene->lights[n]->color.b / (1 + t*t);
+			color.g += scene->lights[n]->color.g / (1 + t*t);
+		}
+	//	n++;
+	//}
+*/
+	return(color);
+}

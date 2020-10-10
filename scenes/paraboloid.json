@@ -21,6 +21,12 @@
           "direction":[3,3,-3],
           "intensity":0.5,
           "color":[75,150,150]
+        },
+        { "type":"lamp",
+          "position":[2,1,5],
+          "direction":[3,3,-3],
+          "intensity":0.5,
+          "color":[75,150,150]
         }
             ],
  "objects":[
