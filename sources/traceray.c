@@ -31,6 +31,7 @@ void	ft_intersect(t_scene *scene)
 	double		deep;
 	t_restr		r;
 	t_color color_light;
+	int color_tmp[3];// 0  - local, 1 - reflection, 2 - refraction
 
 	r.tmin = 1;
 	r.tmax = 100000;
@@ -44,6 +45,14 @@ void	ft_intersect(t_scene *scene)
 		if (scene->object[t.kobj]->specular)
 			deep = ft_light(scene, scene->object[t.kobj]->specular);
 		ft_changecolor(scene, scene->object[t.kobj]->color, deep);
+
+
+	/// НАЧАЛИ ПРАВИТЬ ЗДЕСЬ
+		if (scene->object[t.kobj]->reflection > 0)
+			color_tmp[1] = ft_reflection(scene, scene->cur_point, scene->cur_point, scene->cur_prop.normal);
+	color_tmp[0] = scene->cur_prop.color.r << 16 | scene->cur_prop.color.g << 8 | scene->cur_prop.color.b;
+	color_tmp[0] =
+	result_color(color_tmp[0], color_tmp[1], scene->object[t.kobj]->reflection);
 	}
 	/*else
 	{
