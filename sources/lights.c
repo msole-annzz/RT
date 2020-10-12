@@ -77,14 +77,16 @@ double	ft_shine(t_scene *scene, int s, t_coord vl, t_light *light)
 	return (intense);
 }
 
-t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
+//t_color add_light_color(t_scene *scene/*, t_coord o, t_coord c*/)
+int add_light_color(t_scene *scene/*, t_coord o, t_coord c*/)
+
 {
-	t_coord d; //p
-	t_coord m;
+	//t_coord d; //p
+	//t_coord m;
 	t_color color;
-	int n;
-	double t;
-	double R = 2;
+	//int n;
+	//double t;
+//	double R = 2;
 
 	//n = scene->n_lights - 1;
 
@@ -93,6 +95,7 @@ t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
 	color.r = 0;
 	color.g = 0;
 	color.b = 0;
+	printf("ok\n");
 	//while (n < scene->n_lights)
 	//{
 /*		m = ft_substrv(o, scene->lights[n]->position);
@@ -106,5 +109,5 @@ t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
 	//	n++;
 	//}
 */
-	return(color);
+	return(color.r);
 }

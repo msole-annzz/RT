@@ -90,8 +90,10 @@ int		close_window(void *param)
 
 int		expose_hook(t_scene *scene)
 {
-	mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, \
-	scene->mlx.img, 0, 0);
+	if (scene->color_schema == 2)
+		color_to_anaglyph(scene);
+	else
+		mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.img, 0, 0);
 	ft_legend(scene);
 	return (1);
 }
