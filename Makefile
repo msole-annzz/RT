@@ -14,6 +14,8 @@ SRCS =  main.c\
 		lights.c\
 		quadrsol.c\
 		threads.c\
+		ft_reflection_color.c\
+		color_functions.c\
 		sources/parsing/read_file.c\
 		sources/parsing/check_file.c\
 		sources/parsing/tools.c\

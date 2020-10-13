@@ -9,6 +9,9 @@
 # define THREAD			8
 # define BUFF			1000
 # define MAX_FILE_SIZE	81920
+# define NO_INTERSECT -1//нет пересечений
+# define NO_COLOR -1//нет отражений, бэкграунд
+
 
 # include <fcntl.h>
 # include <errno.h>
@@ -79,4 +82,6 @@ void	anaglyph(t_scene *scene, int p1, int p2, int p);
 
 t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/);
 t_coord vector_mult(t_coord v1, t_coord v2);
+
+
 #endif

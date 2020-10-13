@@ -1,4 +1,4 @@
-#include "../../includes/rt.h"
+#include "../includes/rt.h"
 
 int		get_light(int color1, int color2, float coefficient)
 {
