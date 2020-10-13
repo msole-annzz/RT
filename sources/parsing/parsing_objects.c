@@ -86,6 +86,16 @@ int		fill_objects_end(char *str, int *index, t_scene *rt, int counter)
 		rt->object[rt->current_object]->k_paraboloid = double_parsing(str, index);
 		counter = counter + 1;
 	}
+	else if (find_quotes(str, index, "\"min\"\0"))
+	{
+		rt->object[rt->current_object]->min = double_parsing(str, index);
+		counter = counter + 1;
+	}
+	else if (find_quotes(str, index, "\"max\"\0"))
+	{
+		rt->object[rt->current_object]->max = double_parsing(str, index);
+		counter = counter + 1;
+	}
 
 	return (counter);
 }
@@ -105,11 +115,10 @@ int		fill_objects(char *str, int *index, t_scene *rt, int counter)
 		//printf("c or r\n");
 		counter = fill_objects_middle(str, index, rt, counter);
 	}
-	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') ||\
-		(str[*index + 1] == 's' || (str[*index + 1] == 'h') || (str[*index + 1] == 'k')))
+	else if ((str[*index + 1] == 'a') || (str[*index + 1] == 'n') || (str[*index + 1] == 's') || (str[*index + 1] == 'h') || (str[*index + 1] == 'k') || (str[*index + 1] == 'm'))
 		{
 		counter = fill_objects_end(str, index, rt, counter);
-		//printf("other\n");
+		//printf("k ob %d\n", rt->current_object);
 		}
 	else
 	{
@@ -134,7 +143,7 @@ void	objects_parsing(char *str, int *index, t_scene *rt)
 	{
 		rt->current_object = n;
 		counter = fill_objects(str, index, rt, counter);
-		if (counter == 12)
+		if (counter == 14)
 		{
 			n++;
 			counter = 0;

@@ -27,6 +27,7 @@ t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
 
 	scene->current_object = 0;
 	t.sol = 0;
+	t_temp.issol = 0;// добавила, в интерсекте добавить else и чтобы в t.issol не попадал мусор из t.tempa, когда нет решения 
 	while (scene->current_object < scene->n_objects)
 	{
 		if (scene->object[scene->current_object]->type == e_sphere)

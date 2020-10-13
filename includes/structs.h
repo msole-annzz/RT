@@ -109,9 +109,11 @@ typedef struct	s_object
 	double		reflection;
 	double		refraction; //преломление
 	t_coord		axis_angle; // угол для нормали объекта, для удобства управления
-	int			high; // высота объекта, для ограничений
+	int			high; // высота объекта, для ограничений// пока не используется УДАЛИТь??? но тогда нужно переписывать парсинг
 	double		small_tor_radius;// радус шарика, который крутиться вокруг оси
 	double		big_tor_radius;//радиус окружности вращения
+	//double		min; // донышко
+	//double		max; //крышечка
 
 
 	double		tang;// тангенс angle, не парсится, а рассчитывается
