@@ -79,7 +79,7 @@ void color_to_anaglyph(t_scene	*scene);
 void	anaglyph(t_scene *scene, int p1, int p2, int p);
 void color_to_anaglyph(t_scene	*scene);
 
-t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/);
+t_color add_light_color(t_scene *scene, t_coord o, t_coord c);
 //int add_light_color(t_scene *scene/*, t_coord o, t_coord c*/);
 
 t_coord vector_mult(t_coord v1, t_coord v2);

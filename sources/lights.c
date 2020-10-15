@@ -77,31 +77,31 @@ double	ft_shine(t_scene *scene, int s, t_coord vl, t_light *light)
 	return (intense);
 }
 //int add_light_color(t_scene *scene/*, t_coord o, t_coord c*/)
-t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
+t_color add_light_color(t_scene *scene, t_coord o, t_coord c)
 
 
 {
 
 	t_color color;
 
-	//t_coord d; //p
-	//t_coord m;
-	//int n;
-	//double t;
-//	double R = 2;
+	t_coord d; //p
+	t_coord m;
+	int n;
+	double t;
+double R = 2;
 
-	//n = scene->n_lights - 1;
+	n = scene->n_lights - 1;
 
-	//d = ft_substrv(o, c);
+	d = ft_substrv(o, c);
 
-	// color.r = 0;
-	// color.g = 0;
-	// color.b = 0;
-	color = (t_color){0, 0, 0};
+	 color.r = 0;
+	 color.g = 0;
+	 color.b = 0;
+	//color = (t_color){0, 0, 0};
 	//printf("ok\n");
-	//while (n < scene->n_lights)
-	//{
-/*		m = ft_substrv(o, scene->lights[n]->position);
+	while (n < scene->n_lights)
+	{
+		m = ft_substrv(o, scene->lights[n]->position);
 		t = 1/ft_modul_vector(d) * ft_modul_vector(vector_mult(m, d));
 		if (t < R) //R = радиус для сферы по формулам из чата;
 		{
@@ -109,8 +109,7 @@ t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
 			color.b += scene->lights[n]->color.b / (1 + t*t);
 			color.g += scene->lights[n]->color.g / (1 + t*t);
 		}
-	//	n++;
-	//}
-*/
+		n++;
+	}
 	return(color);
 }
