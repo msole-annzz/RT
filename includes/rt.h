@@ -77,6 +77,7 @@ int		ft_mouse_move(int x, int y, t_scene *scene);
 void	anaglyph(t_scene *scene, int p1, int p2, int p);
 
 t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/);
+<<<<<<< HEAD
 t_coord vector_mult(t_coord *v1, t_coord *v2);
 
 /*
@@ -99,5 +100,9 @@ t_coord 	ft_norm_vector(t_coord vector);
 
 t_cross		ft_intersect_objects(t_scene *scene, t_coord start, t_coord ray);
 t_cross		ft_intersect_ray_sphera(t_object *sphere, t_coord origin, t_coord direction);
+=======
+t_coord vector_mult(t_coord v1, t_coord v2);
+
+>>>>>>> c31d4074a9d40f22ef411c49825a89df7d00fc22
 
 #endif

@@ -182,6 +182,17 @@ typedef struct	s_mouse
 	int			num_obj;
 }				t_mouse;
 
+typedef struct		s_cross
+{
+	t_coord		start;
+	t_coord		direct;
+	t_coord		norm;
+	t_coord		ref;
+	double			dist;
+	int				id;
+	int				depth;
+}					t_cross;
+
 typedef struct	s_scene
 {
 	t_mlx		mlx;
@@ -208,6 +219,7 @@ typedef struct	s_scene
 	int			current_object;
 	int			n_lights;
 	int			n_objects;
+	int			depth_mirror;// глубина отражения
 	int			color_schema; // 0 - standart; 1 - sepia;
 
 	t_mouse		*mouse;
