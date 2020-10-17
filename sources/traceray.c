@@ -6,9 +6,14 @@ void	*ft_traceray(void *thread_data)
 	int		j;
 	t_scene	*scene;
 	t_coord cur_point;
-	t_distcolor cur_prop;
+	t_color local_color;
+t_restr         r;
+	
+      r.tmin = 1;
+      r.tmax = 100000;
+scene = (t_scene *)(thread_data);
+	
 
-	scene = (t_scene *)(thread_data);
 	i = scene->thrminwidth;
 	j = 0;
 	while (j < WIN_HEIGHT)
@@ -16,9 +21,8 @@ void	*ft_traceray(void *thread_data)
 		while (i < scene->thrmaxwidth)
 		{
 			cur_point=ft_conv2to3(scene, i - WIN_WIDTH / 2, j - WIN_HEIGHT / 2);
-			cur_prop=ft_initcolor(scene);
-			cur_prop=ft_intersect(scene, scene->camera.place, cur_point, cur_prop);
-			ft_put_pixel(scene, i, j, cur_prop);
+			local_color=ft_intersect(scene, scene->camera.place, cur_point, r, 3);
+			ft_put_pixel(scene, i, j, ft_clamp(local_color));
 			i++;
 		}
 		i = scene->thrminwidth;
@@ -50,22 +54,31 @@ normal=ft_getnorm_paraboloid(object, crossp);
 return (normal);
 }
 
-t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_distcolor cur_prop)
+t_coord ft_reflect_ray(t_coord v1, t_coord normal)
+{
+return(ft_substrv(ft_mult_num_vector(2*ft_dotprod(v1, normal), normal), v1));
+}
+
+
+t_color	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_restr r, int recurs)
 {
 	t_corsol	t;
 	double		deep;
-	t_restr		r;
 	t_color color_light;
-//	t_coord normal;
-//	t_coord p;
-//	t_coord view;
-	//int n;
-	//t_distcolor cur_prop;
+	t_distcolor cur_prop;
+	t_coord reflected_ray;
+	t_color local_color;
+	t_color reflected_color;
+t_restr         r1;
+        
+      r1.tmin = 0.0001;
+      r1.tmax = 100000;
 
-	r.tmin = 1;
-	r.tmax = 100000;
 	t = ft_findnearobj(scene, start_point, end_point, r);
-	if (t.issol == 1)
+	local_color=ft_initcolor(scene);  
+	
+
+if (t.issol == 1)
 	{
 		cur_prop.p = ft_add_vector(start_point, ft_mult_num_vector(t.sol, \
 		end_point));
@@ -74,19 +87,39 @@ t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point,
 		deep = 0;
 		if (scene->object[t.kobj]->specular)
 			deep = ft_ligth(scene,cur_prop,  scene->object[t.kobj]->specular);
-		cur_prop=ft_changecolor(scene, scene->object[t.kobj]->color, deep);
-	}
-	else if (t.issol == 0)
-	{
+		local_color=ft_changecolor(scene, scene->object[t.kobj]->color, deep);
+		if (scene->object[t.kobj]->reflection <= 0 || recurs <= 0)
+    			return (local_color);	
+		reflected_ray = ft_reflect_ray(cur_prop.p, cur_prop.normal);
+  		reflected_color = ft_intersect(scene,cur_prop.view, reflected_ray, r1, recurs - 1);
 
-		 color_light = add_light_color(scene, start_point, end_point);
-		printf("%d\n", color_light.r);
-		//n = add_light_color(scene/*, scene->camera.place, scene->cur_point*/);
-
-		   cur_prop.color = color_light;
-	}
-return(cur_prop);
+ return (ft_add2color(ft_mult_num_color(1 - scene->object[t.kobj]->reflection, local_color),
+	     ft_mult_num_color(scene->object[t.kobj]->reflection, reflected_color)));
+	
 }
+	
+return(local_color);
+}
+
+
+t_color ft_add2color(t_color c1, t_color c2)
+{
+t_color res_color;
+res_color.r = c1.r + c2.r;
+res_color.g = c1.g + c2.g;
+res_color.b = c1.b + c2.b;
+return(res_color);
+}
+
+t_color ft_mult_num_color(double k, t_color c1)
+{
+t_color res_color;
+res_color.r = c1.r * k;
+res_color.g = c1.g * k;
+res_color.b = c1.b * k;
+return(res_color);
+}
+
 
 t_coord	ft_getnorm_cylinder(t_object object, t_coord crossp)
 {

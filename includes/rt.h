@@ -9,6 +9,8 @@
 # define THREAD			8
 # define BUFF			1000
 # define MAX_FILE_SIZE	81920
+#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MAX(a,b) (((a)>(b))?(a):(b))
 
 # include <fcntl.h>
 # include <errno.h>
@@ -51,17 +53,21 @@ t_corsol	ft_intersect_cone(t_scene *scene, t_coord o, t_coord c, t_restr r);
 t_corsol	ft_intersect_plane(t_scene *scene, t_coord o, t_coord c, t_restr r);
 t_corsol	ft_intersect_paraboloid(t_scene *scene, t_coord o, t_coord c, t_restr r);
 void		*ft_traceray(void *thread_data);
-t_distcolor     ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_distcolor cur_prop);
+t_color     ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_restr r, int recurs);
 double ft_ligth(t_scene *scene, t_distcolor cur_prop, int s);
-void		ft_put_pixel(t_scene *scene, int i, int j, t_distcolor cur_prop);
-t_distcolor     ft_changecolor(t_scene *scene, t_color color, double deep);
-t_distcolor     ft_initcolor(t_scene *scene);
+void    ft_put_pixel(t_scene *scene, int i, int j, t_color color);
+t_color ft_changecolor(t_scene *scene, t_color color, double deep);
+t_color ft_initcolor(t_scene *scene);
+t_color ft_add2color(t_color c1, t_color c2);
+t_color ft_mult_num_color(double k, t_color c1);
+t_color ft_clamp(t_color color);
 t_quadreq	ft_quadrsolution(double a, double b, double c);
 t_corsol	ft_get_correct_solution(t_quadreq t, t_restr r, int k);
 t_coord         ft_conv2to3(t_scene *scene, int x, int y);
 t_coord ft_getnorm_cylinder(t_object object, t_coord crossp);
 t_coord ft_getnorm_cone(t_object object, t_coord crossp);
 t_coord ft_getnorm_paraboloid(t_object object, t_coord crossp);
+t_coord ft_reflect_ray(t_coord v1, t_coord normal);
 void		ft_getnorms_and_view (t_scene *scene, int i);
 double		ft_shine(t_scene *scene, int s, t_coord vl, t_light *light);
 double		ft_lights23(t_scene *scene, t_restr r, t_light *light, int s);
@@ -84,4 +90,5 @@ t_color add_light_color(t_scene *scene, t_coord o, t_coord c);
 //int add_light_color(t_scene *scene/*, t_coord o, t_coord c*/);
 
 t_coord vector_mult(t_coord v1, t_coord v2);
+void    sepia(t_scene *scene, int p, t_color color);
 #endif

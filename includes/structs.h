@@ -136,7 +136,7 @@ typedef struct	s_light
 
 typedef struct	s_distcolor
 {
-	t_color		color;
+//	t_color		color;
 	double		dist;
 	int			objnum;
 	t_coord		normal;
