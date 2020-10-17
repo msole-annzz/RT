@@ -75,22 +75,25 @@ t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point,
 		deep = 0;
 		if (scene->object[t.kobj]->specular)
 			deep = ft_ligth(scene,normal, p,view,  scene->object[t.kobj]->specular);
-		if (scene->object[t.kobj]->reflection) //  если у фигура зеркальная, но снова запускаем intersect чтобы найти отражающися цвет
-			{
-					// тут функция отраженного луча
-				reflect_color = ft_intersect(scene, p, t_coord end_point, cur_prop);// перезаписываем cur/ prop или нужна его копия. Что значит cur prop
-			}
+		// if (scene->object[t.kobj]->reflection) //  если у фигура зеркальная, но снова запускаем intersect чтобы найти отражающися цвет
+		// 	{
+		// 			// тут функция отраженного луча
+		// 		reflect_color = ft_intersect(scene, p, t_coord end_point, cur_prop);// перезаписываем cur/ prop или нужна его копия. Что значит cur prop
+		// 	}
 		cur_prop = ft_changecolor(scene, scene->object[t.kobj]->color, deep);
 	}
-	else if (t.issol == 0)
-	{
+//	else if (t.issol == 0)
+//	{
 
 		 color_light = add_light_color(scene, start_point, end_point);
-		printf("%d\n", color_light.r);
+//		printf("%d\n", color_light.r);
 		//n = add_light_color(scene/*, scene->camera.place, scene->cur_point*/);
 
-		   cur_prop.color = color_light;
-	}
+		   cur_prop.color.r = color_light.r + cur_prop.color.r;
+		   cur_prop.color.g = color_light.g + cur_prop.color.g;
+		   cur_prop.color.b = color_light.b + cur_prop.color.b;
+
+//	}
 return(cur_prop);
 }
 

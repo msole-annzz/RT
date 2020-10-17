@@ -79,6 +79,7 @@ int		ft_mouse_move(int x, int y, t_scene *scene);
 void color_to_anaglyph(t_scene	*scene);
 void	anaglyph(t_scene *scene, int p1, int p2, int p);
 void color_to_anaglyph(t_scene	*scene);
+void	m_b(t_scene *scene, int p1, int p2, int p);
 
 t_color add_light_color(t_scene *scene, t_coord o, t_coord c);
 //int add_light_color(t_scene *scene/*, t_coord o, t_coord c*/);

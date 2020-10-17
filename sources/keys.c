@@ -30,7 +30,10 @@ void	ft_move(int keycode, t_scene *scene)
 	if (keycode == KEY_ANSI_A)
 		scene->camera.place.z = scene->camera.place.z + 1;
 	if (keycode == KEY_ANSI_Z)
+	{
 		scene->camera.place.z = scene->camera.place.z - 1;
+		//printf("%f \t,%f \t,%f \n", scene->lights[3]->position.x, scene->lights[3]->position.y,scene->lights[3]->position.z);
+	}
 }
 
 int		scene_keys(int keycode, t_scene *scene)

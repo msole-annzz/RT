@@ -9,40 +9,27 @@ void color_to_anaglyph(t_scene	*scene)
 	int		p1;
 	int		p2;
 
-	//scene->mlx.anaglyph_img = mlx_new_image(scene->mlx.init, WIN_WIDTH, WIN_HEIGHT);
-	//scene->image.anaglyph_data = (int *)mlx_get_data_addr(scene->mlx.img, &scene->image.bpp,&scene->image.size, &scene->image.endian);
-
-
-
 	i = 0;
 	j = 0;
 	while (j < WIN_HEIGHT)
 	{
 		while (i < WIN_WIDTH)
 		{
-			/*p = WIN_WIDTH * j + i;
+			p = WIN_WIDTH * j + i;
 			p1 = WIN_WIDTH * j + i - 3;
 			p2 = WIN_WIDTH * j + i + 3;
 			if ((i - 3) < 0)
 				p1 = p;
 			if ((i + 3) > WIN_WIDTH - 1)
-				p2 = p;*/
-			p = WIN_WIDTH * j + i;
-			p1 = WIN_WIDTH * j + i - 1;
-			p2 = WIN_WIDTH * j + i + 1;
-			if ((i - 1) < 0)
-				p1 = p;
-			if ((i + 1) > WIN_WIDTH - 1)
 				p2 = p;
-
-				m_b(scene, p, p, p);
 			//anaglyph(scene, p1, p2, p);
+			m_b(scene, p1, p2, p);
 			i++;
 		}
 		i = 0;
 		j++;
 	}
-	mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.filtered_img, 0, 0);
+	//mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.filtered_img, 0, 0);
 }
 
 void		ft_threads(t_scene *scene)
@@ -69,8 +56,13 @@ void		ft_threads(t_scene *scene)
 	{
 		pthread_join(threads[i], NULL);
 	}
-	if (scene->color_schema == 2)
+	//if (scene->color_schema == 2)
+	{	
 		color_to_anaglyph(scene);
-	else
-		mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.img, 0, 0);
+		mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.filtered_img, 0, 0);
+	}
+	//else
+		//mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.img, 0, 0);
+	//mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.img, 0, 0);
+	//mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, scene->mlx.filtered_img, 0, 0);
 }

@@ -38,12 +38,12 @@ t_color int_to_rgb(int p)
 	return(c);
 }
 
-void	anaglyph(t_scene *scene, int p1, int p2, int p)
+/*void	anaglyph(t_scene *scene, int p1, int p2, int p)
 {
 	t_color c1;
 	t_color c2;
 	t_color c;
-	
+
 	c1 = int_to_rgb(scene->image.data[p1]);
 	c2 = int_to_rgb(scene->image.data[p2]);
 	c = int_to_rgb(scene->image.data[p]);
@@ -52,6 +52,27 @@ void	anaglyph(t_scene *scene, int p1, int p2, int p)
 	c.b = c2.b * 1;
 	scene->image.filtered_data[p] = ((c.r << 16) | (c.g << 8) | c.b);
 }
+*/
+void	m_b(t_scene *scene, int p1, int p2, int p)
+{
+	t_color c1;
+	t_color c2;
+	t_color c;
+
+	c1 = int_to_rgb(scene->image.data[p1]);
+	c2 = int_to_rgb(scene->image.data[p2]);
+	c = int_to_rgb(scene->image.data[p]);
+	c.r = (c1.r/3 + c.r/3 + c2.r/3);
+	c.g = (c1.g/3 + c.g/3 + c2.g/3);
+	c.b = (c1.b/3 + c.b/3 + c2.b/3);
+	/*
+	c.r = (c1.r + c.r + c2.r) / 3;
+	c.g = (c1.g + c.g + c2.g) / 3;
+	c.b = (c1.b + c.b + c2.b) / 3;
+	*/
+	scene->image.filtered_data[p] = ((c.r << 16) | (c.g << 8) | c.b);
+}
+
 
 // работающий анаглиф
 /*
@@ -60,7 +81,7 @@ void	anaglyph(t_scene *scene, int p1, int p2, int p)
 	t_color c1;
 	t_color c2;
 	t_color c;
-	
+
 	c1 = int_to_rgb(scene->image.data[p1]);
 	c2 = int_to_rgb(scene->image.data[p2]);
 	c = int_to_rgb(scene->image.data[p]);
