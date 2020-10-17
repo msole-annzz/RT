@@ -89,27 +89,23 @@ t_color	anaglyph(t_scene *scene, int p1, int p2, int p)
 }
 */
 
-void    ft_put_pixel(t_scene *scene, int i, int j)
+void	ft_put_pixel(t_scene *scene, int x, int y)
 {
-    int p;
-    int red;
-    int green;
-    int blue;
+	int pixel;
+	int red;
+	int green;
+	int blue;
 
-
-    p = (WIN_WIDTH * j + i);
-    if (scene->color_schema == 0)
-    {
-
-
-    red = scene->cur_prop.color.r;
-    green = scene->cur_prop.color.g;
-    blue = scene->cur_prop.color.b;
-
-    scene->image.data[p] = ((red << 16) | (green << 8) | blue);
+	pixel = (scene->width * y + x);
+	if (scene->color_schema == 0)
+	{
+		red = scene->cur_prop.color.r;
+		green = scene->cur_prop.color.g;
+		blue = scene->cur_prop.color.b;
+		scene->image.data[pixel] = ((red << 16) | (green << 8) | blue);
 	}
-    if (scene->color_schema == 1)
-      sepia(scene, p);
+	if (scene->color_schema == 1)
+		sepia(scene, pixel);
 	//if (scene->color_schema == 2)
       //anaglyph (scene, p);
 
@@ -136,6 +132,8 @@ void    ft_put_pixel(t_scene *scene, int i, int j)
 
 }*/
 
+
+
 void	ft_changecolor(t_scene *scene, t_color color, double deep)
 {
 	if (deep > 1)
@@ -155,6 +153,22 @@ void	ft_changecolor(t_scene *scene, t_color color, double deep)
 		scene->cur_prop.color.b = color.b * deep;
 
 }
+
+t_color	ft_change_color_new(t_color *color, double persent)
+{
+	t_color result;
+
+	if (persent > 1)
+		persent = 1;
+	if ((result.r = color->r * persent) > 255)
+		result.r = 255;
+	if ((result.g = color->g * persent) > 255)
+		result.g = 255;
+	if ((result.b = color->b * persent) > 255)
+		result.b = 255;
+	return (result);
+}
+
 
 
 void	ft_initcolor(t_scene *scene)

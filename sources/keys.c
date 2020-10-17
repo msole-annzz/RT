@@ -38,7 +38,7 @@ int		scene_keys(int keycode, t_scene *scene)
 	if (keycode == KEY_ESCAPE)
 	{
 		mlx_destroy_window(scene->mlx.init, scene->mlx.win);
-		mlx_destroy_window(scene->mlx.init, scene->legend.win);
+		// mlx_destroy_window(scene->mlx.init, scene->legend.win);
 
 		exit(0);
 	}
@@ -57,7 +57,7 @@ int		scene_keys(int keycode, t_scene *scene)
 	if (keycode == KEY_ANSI_Q)
 		scene->color_schema = 0;
 	ft_threads(scene);
-	ft_legend(scene);
+	// ft_legend(scene);
 	return (0);
 }
 
@@ -84,7 +84,7 @@ int		close_window(void *param)
 
 	scene = (t_scene *)param;
 	// free_memory(paint);
-	mlx_destroy_window(scene->mlx.init, scene->mlx.win);
+	// mlx_destroy_window(scene->mlx.init, scene->mlx.win);
 	exit(0);
 }
 
@@ -92,6 +92,6 @@ int		expose_hook(t_scene *scene)
 {
 	mlx_put_image_to_window(scene->mlx.init, scene->mlx.win, \
 	scene->mlx.img, 0, 0);
-	ft_legend(scene);
+	// ft_legend(scene);
 	return (1);
 }

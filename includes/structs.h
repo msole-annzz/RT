@@ -10,6 +10,8 @@ typedef enum
 	e_cylindr,
 	e_cone,
 	e_hemisphere,
+	e_tube,
+	e_ring,
 	e_ambient,
 	e_point,
 	e_direct,
@@ -41,8 +43,13 @@ typedef struct	s_mlx
 typedef struct	s_quadreq
 {
 	int			eqcount;
-	double		x1;
-	double		x2;
+	double		a;
+	double		b;
+	double		c;
+	double		discr;
+	double		sqrt_discr;
+	double		d_1;
+	double		d_2;
 }				t_quadreq;
 
 typedef struct	s_coord
@@ -105,7 +112,7 @@ typedef struct	s_object
 	int			specular;
 	double		angle;
 	double		k_paraboloid;//коэффициент для построения парабалоида
-	t_coord		vectorperp; // хочется поменять на axis_obj
+	t_coord		axis; // хочется поменять на axis_obj
 	double		reflection;
 	double		refraction; //преломление
 	t_coord		axis_angle; // угол для нормали объекта, для удобства управления
@@ -147,6 +154,7 @@ typedef struct	s_distcolor
 typedef struct	s_corsol
 {
 	double		sol;
+	double		sol_1;
 	int			kobj;
 	int			issol;
 }				t_corsol;
@@ -190,6 +198,10 @@ typedef struct	s_scene
 	t_color		bkg_color;
 	t_angle		angle;
 	double		d;
+	double		x0;
+	double		y0;
+	int			width;
+	int			height;
 	int			thrminwidth;
 	int			thrmaxwidth;
 	int			current_light;
@@ -200,5 +212,25 @@ typedef struct	s_scene
 
 	t_mouse		*mouse;
 	}				t_scene;
+
+typedef struct		s_matrix
+{	
+	double			cos_x;
+	double			cos_y;
+	double			cos_z;
+	double			sin_x;
+	double			sin_y;
+	double			sin_z;
+}					t_matrix;
+
+typedef struct	s_cross
+{
+	// double		d_1;
+	// double		d_2;
+	double		len;
+	int			id;
+	int			check;
+	t_coord		vec_3;
+}				t_cross;
 
 #endif

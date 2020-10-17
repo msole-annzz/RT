@@ -4,9 +4,14 @@
 void		ft_init_scene(t_scene *scene)
 {
 	scene->d = 1;
-	scene->bkg_color.r = 0;
-	scene->bkg_color.g = 0;
-	scene->bkg_color.b = 0;
+	scene->bkg_color = (t_color){0, 0, 0};
+	// scene->bkg_color.r = 0;
+	// scene->bkg_color.g = 0;
+	// scene->bkg_color.b = 0;
+	scene->width = WIN_WIDTH;
+	scene->height = WIN_HEIGHT;
+	scene->x0 = (scene->width - 1) / 2.0;
+	scene->y0 = (scene->height - 1) / 2.0;
 	scene->angle.x = 0;
 	scene->angle.y = 0;
 	scene->angle.z = 0;
@@ -20,7 +25,7 @@ void		ft_init_scene(t_scene *scene)
 ** we rewrite t.
 */
 
-t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
+t_corsol	ft_findnearobj(t_scene *scene, t_coord camera, t_coord ray, t_restr limit)
 {
 	t_corsol	t_temp;
 	t_corsol	t;
@@ -30,15 +35,15 @@ t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
 	while (scene->current_object < scene->n_objects)
 	{
 		if (scene->object[scene->current_object]->type == e_sphere)
-			t_temp = ft_intersect_sfera(scene, o, c, r);
+			t_temp = ft_intersect_sphere(scene, camera, ray, limit);
 		if (scene->object[scene->current_object]->type == e_plane)
-			t_temp = ft_intersect_plane(scene, o, c, r);
+			t_temp = ft_intersect_plane(scene, camera, ray, limit);
 		if (scene->object[scene->current_object]->type == e_cylindr)
-			t_temp = ft_intersect_cylinder(scene, o, c, r);
+			t_temp = ft_intersect_cylinder(scene,camera, ray, limit);
 		if (scene->object[scene->current_object]->type == e_cone)
-			t_temp = ft_intersect_cone(scene, o, c, r);
+			t_temp = ft_intersect_cone(scene, camera, ray, limit);
 		if (scene->object[scene->current_object]->type == e_paraboloid)
-			t_temp = ft_intersect_paraboloid(scene, o, c, r);
+			t_temp = ft_intersect_paraboloid(scene, camera, ray, limit);
 		if (((t_temp.issol == 1) && (t_temp.sol < t.sol)) || \
 		((t_temp.issol == 1) && (t.sol == 0)))
 			t = t_temp;
@@ -47,15 +52,7 @@ t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
 	return (t);
 }
 
-void		ft_conv2to3(t_scene *scene, int x, int y)
-{
-	scene->cur_point.x = x * (double)VIEW_WIDTH / WIN_WIDTH;
-	scene->cur_point.y = -y * (double)VIEW_HEIGHT / WIN_HEIGHT;
-	scene->cur_point.z = scene->d;
-	scene->cur_point = ft_rotatex(scene->angle, scene->cur_point);
-	scene->cur_point = ft_rotatey(scene->angle, scene->cur_point);
-	scene->cur_point = ft_rotatez(scene->angle, scene->cur_point);
-}
+
 
 /*
 ** Function <mlx_hook> has parametrs: 12 for expose_hook, 0 - for MAC
@@ -77,8 +74,8 @@ void		ft_hooks(t_scene *scene)
 	//mlx_hook(scene->mlx.win, 6, 0, ft_mouse_move, scene);
 
 	mlx_hook(scene->mlx.win, 2, 0, scene_keys, scene);
-	mlx_hook(scene->legend.win, 2, 0, scene_keys, scene);
-	//mlx_hook(scene->mlx.win, 17, 0, close_window, scene);
+	// mlx_hook(scene->legend.win, 2, 0, scene_keys, scene);
+	mlx_hook(scene->mlx.win, 17, 0, close_window, scene);
 	//mlx_hook(scene->legend.win, 17, 0, close_window, scene);
 }
 
@@ -100,8 +97,8 @@ int			main(int argc, char **argv)
 	scene->legend.init = scene->mlx.init;
 	scene->mlx.win = mlx_new_window(scene->mlx.init, WIN_WIDTH, \
 				WIN_HEIGHT, "RT");
-	scene->legend.win = mlx_new_window(scene->mlx.init, WIN_WIDTH/2, \
-				WIN_HEIGHT, "Legend");
+	// scene->legend.win = mlx_new_window(scene->mlx.init, WIN_WIDTH/2, \
+	// 			WIN_HEIGHT, "Legend");
 	scene->mlx.img = mlx_new_image(scene->mlx.init, WIN_WIDTH, WIN_HEIGHT);
 	scene->mlx.filtered_img = mlx_new_image(scene->mlx.init, WIN_WIDTH, WIN_HEIGHT);
 	scene->legend.img = mlx_new_image(scene->mlx.init, WIN_WIDTH/2, WIN_HEIGHT);
@@ -111,7 +108,7 @@ int			main(int argc, char **argv)
 	ft_init_scene(scene);
 	ft_threads(scene);
 	ft_hooks(scene);
-	ft_legend(scene);
+	// ft_legend(scene);
 	mlx_loop(scene->mlx.init);
 	free(str);
 	ft_free_scene(scene);

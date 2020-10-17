@@ -1,5 +1,5 @@
 {
- "camera"   :{"position":[0,0,0],
+ "camera"   :{"position":[0,0,-10],
            "direction":[0,0,0]
             },
  "lights": [
@@ -41,6 +41,7 @@
               "specularity":1000,
               "reflection":0,
               "refraction": 15,
+              "k_paraboloid":0.01,
               "high": -3
             },
             { "type":"cone",
@@ -53,6 +54,7 @@
               "specularity":1000,
               "reflection":0,
               "refraction": 15,
+              "k_paraboloid":0,
               "high": -3
             },
             { "type":"cylinder",
@@ -65,6 +67,7 @@
               "specularity":1000,
               "reflection":0,
               "refraction": 15,
+              "k_paraboloid":0,
               "high": -3
             },
             { "type":"plane",
@@ -77,6 +80,7 @@
               "specularity":10,
               "reflection":0,
               "refraction": 15,
+              "k_paraboloid":100,
               "high": -3
             },
 
@@ -90,6 +94,7 @@
               "specularity":10,
               "reflection":0,
               "refraction": 15,
+              "k_paraboloid":100,
               "high": -3
             }
           ]

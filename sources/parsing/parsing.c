@@ -34,9 +34,9 @@ void	check_normals(t_scene *rt)
 	{
 		if ((rt->object[n]->type == 2) || (rt->object[n]->type == 3) ||\
 			(rt->object[n]->type == 4))
-			if ((rt->object[n]->vectorperp.x == 0) &&\
-			(rt->object[n]->vectorperp.y == 0) && \
-			(rt->object[n]->vectorperp.z == 0))
+			if ((rt->object[n]->axis.x == 0) &&\
+			(rt->object[n]->axis.y == 0) && \
+			(rt->object[n]->axis.z == 0))
 				file_contents_error();
 		n++;
 	}

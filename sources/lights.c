@@ -36,7 +36,7 @@ double	ft_lights23(t_scene *scene, t_restr r, t_light *light, int s)
 	intense = 0;
 	if (light->type == 2)
 	{
-		vl = ft_substrv(light->position, scene->cur_prop.p);
+		vl = ft_sub_vectors(light->position, scene->cur_prop.p);
 		r.tmax = 1;
 	}
 	if (light->type == 3)
@@ -45,9 +45,9 @@ double	ft_lights23(t_scene *scene, t_restr r, t_light *light, int s)
 		r.tmax = 100000;
 	}
 	x = ft_findnearobj(scene, scene->cur_prop.p, vl, r);
-	med = ft_mult_num_vector(1 / ft_lengthv(scene->cur_prop.view), \
+	med = ft_mult_num_vector(1 / ft_length_vector(scene->cur_prop.view), \
 	scene->cur_prop.view);
-	if ((x.sol == 0) && (ft_dotprod(med, scene->cur_prop.normal) >= 0))
+	if ((x.sol == 0) && (ft_dotproduct(med, scene->cur_prop.normal) >= 0))
 		intense += ft_shine(scene, s, vl, light);
 	return (intense);
 }
@@ -60,18 +60,18 @@ double	ft_shine(t_scene *scene, int s, t_coord vl, t_light *light)
 	double	rv;
 
 	intense = 0;
-	m = ft_dotprod(vl, scene->cur_prop.normal);
+	m = ft_dotproduct(vl, scene->cur_prop.normal);
 	if (m > 0)
 		intense += light->intens * m / \
-		(ft_lengthv(scene->cur_prop.normal) * ft_lengthv(vl));
+		(ft_length_vector(scene->cur_prop.normal) * ft_length_vector(vl));
 	if (s != -1)
 	{
-		r = ft_substrv(ft_mult_num_vector(2 * m, scene->cur_prop.normal), vl);
-		rv = ft_dotprod(r, scene->cur_prop.view);
+		r = ft_sub_vectors(ft_mult_num_vector(2 * m, scene->cur_prop.normal), vl);
+		rv = ft_dotproduct(r, scene->cur_prop.view);
 		if (rv > 0)
 		{
 			intense += light->intens * (pow(rv / \
-			(ft_lengthv(r) * ft_lengthv(scene->cur_prop.view)), s));
+			(ft_length_vector(r) * ft_length_vector(scene->cur_prop.view)), s));
 		}
 	}
 	return (intense);
@@ -88,14 +88,14 @@ t_color add_light_color(/*t_scene *scene, t_coord o, t_coord c*/)
 
 	//n = scene->n_lights - 1;
 
-	//d = ft_substrv(o, c);
+	//d = ft_sub_vectors(o, c);
 
 	color.r = 0;
 	color.g = 0;
 	color.b = 0;
 	//while (n < scene->n_lights)
 	//{
-/*		m = ft_substrv(o, scene->lights[n]->position);
+/*		m = ft_sub_vectors(o, scene->lights[n]->position);
 		t = 1/ft_modul_vector(d) * ft_modul_vector(vector_mult(m, d));
 		if (t < R) //R = радиус для сферы по формулам из чата;
 		{

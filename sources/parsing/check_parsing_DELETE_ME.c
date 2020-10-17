@@ -35,9 +35,9 @@ void		check_parsing(t_scene *rt)
 		printf("Specularity:\tReflection:\t\tRefraction:\n");
 		printf("%d\t\t%f\t\t%f\n", rt->object[n]->specular, rt->object[n]->reflection, rt->object[n]->refraction);
 		printf("Position:\t\tColor:\t\tNormal:\t\tNormal Angel:\n");
-		printf("x %f\t\tr %c\t\tx %f\t\tx %f\n", rt->object[n]->center.x, rt->object[n]->color.r, rt->object[n]->vectorperp.x, rt->object[n]->axis_angle.x);
-		printf("y %f\t\tg %c\t\ty %f\t\ty %f\n", rt->object[n]->center.y, rt->object[n]->color.g, rt->object[n]->vectorperp.y, rt->object[n]->axis_angle.y);
-		printf("z %f\t\tb %c\t\tz %f\t\tz %f\n", rt->object[n]->center.z, rt->object[n]->color.b, rt->object[n]->vectorperp.z, rt->object[n]->axis_angle.z);
+		printf("x %f\t\tr %c\t\tx %f\t\tx %f\n", rt->object[n]->center.x, rt->object[n]->color.r, rt->object[n]->axis.x, rt->object[n]->axis_angle.x);
+		printf("y %f\t\tg %c\t\ty %f\t\ty %f\n", rt->object[n]->center.y, rt->object[n]->color.g, rt->object[n]->axis.y, rt->object[n]->axis_angle.y);
+		printf("z %f\t\tb %c\t\tz %f\t\tz %f\n", rt->object[n]->center.z, rt->object[n]->color.b, rt->object[n]->axis.z, rt->object[n]->axis_angle.z);
 		printf("\n");
 		n++;
 	}

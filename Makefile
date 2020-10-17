@@ -47,6 +47,7 @@ MINILIBX = -L ./minilibx/ -lmlx -framework OpenGL -framework AppKit
 
 vpath %.c ./sources/
 vpath %.c ./sources/parsing/
+vpath %.c ./sources/intersect_object
 #vpath %.c ./minilibx/
 vpath %.h ./includes/
 

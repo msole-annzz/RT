@@ -5,7 +5,7 @@
 ** t_quadreq t -  the result of solving a quadratic equation
 */
 
-t_corsol	ft_intersect_sfera(t_scene *scene, t_coord o, t_coord c, t_restr r)
+t_corsol	ft_intersect_sphere(t_scene *scene, t_coord o, t_coord c, t_restr r)
 {
 	t_quadreq t;
 

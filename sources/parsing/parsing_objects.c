@@ -59,7 +59,7 @@ int		fill_objects_end(char *str, int *index, t_scene *rt, int counter)
 	}
 	else if (find_quotes(str, index, "\"normal\"\0"))
 	{
-		rt->object[rt->current_object]->vectorperp = \
+		rt->object[rt->current_object]->axis = \
 		parsing_coordinates(str, index);
 		*index = *index + 1;
 		counter = counter + 1;
