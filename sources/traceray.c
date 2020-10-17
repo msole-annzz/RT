@@ -59,6 +59,7 @@ t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point,
 	t_coord normal;
 	t_coord p;
 	t_coord view;
+	t_color reflect_color;
 	//int n;
 	//t_distcolor cur_prop;
 
@@ -68,13 +69,18 @@ t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point,
 	if (t.issol == 1)
 	{
 		p = ft_add_vector(start_point, ft_mult_num_vector(t.sol, \
-		end_point));
-		normal=ft_getnormals(*scene->object[t.kobj], p);
+		end_point));//точка пересечения с фигурой луча из камеры
+		normal = ft_getnormals(*scene->object[t.kobj], p);
 		view = ft_mult_num_vector(-1,end_point);
 		deep = 0;
 		if (scene->object[t.kobj]->specular)
 			deep = ft_ligth(scene,normal, p,view,  scene->object[t.kobj]->specular);
-		cur_prop=ft_changecolor(scene, scene->object[t.kobj]->color, deep);
+		if (scene->object[t.kobj]->reflection) //  если у фигура зеркальная, но снова запускаем intersect чтобы найти отражающися цвет
+			{
+					// тут функция отраженного луча
+				reflect_color = ft_intersect(scene, p, t_coord end_point, cur_prop);// перезаписываем cur/ prop или нужна его копия. Что значит cur prop
+			}
+		cur_prop = ft_changecolor(scene, scene->object[t.kobj]->color, deep);
 	}
 	else if (t.issol == 0)
 	{
