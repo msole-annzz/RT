@@ -56,9 +56,9 @@ t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point,
 	double		deep;
 	t_restr		r;
 	t_color color_light;
-	t_coord normal;
-	t_coord p;
-	t_coord view;
+//	t_coord normal;
+//	t_coord p;
+//	t_coord view;
 	//int n;
 	//t_distcolor cur_prop;
 
@@ -67,13 +67,13 @@ t_distcolor	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point,
 	t = ft_findnearobj(scene, start_point, end_point, r);
 	if (t.issol == 1)
 	{
-		p = ft_add_vector(start_point, ft_mult_num_vector(t.sol, \
+		cur_prop.p = ft_add_vector(start_point, ft_mult_num_vector(t.sol, \
 		end_point));
-		normal=ft_getnormals(*scene->object[t.kobj], p);
-		view = ft_mult_num_vector(-1,end_point);
+		cur_prop.normal=ft_getnormals(*scene->object[t.kobj], cur_prop.p);
+		cur_prop.view = ft_mult_num_vector(-1,end_point);
 		deep = 0;
 		if (scene->object[t.kobj]->specular)
-			deep = ft_ligth(scene,normal, p,view,  scene->object[t.kobj]->specular);
+			deep = ft_ligth(scene,cur_prop,  scene->object[t.kobj]->specular);
 		cur_prop=ft_changecolor(scene, scene->object[t.kobj]->color, deep);
 	}
 	else if (t.issol == 0)

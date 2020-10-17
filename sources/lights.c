@@ -6,7 +6,7 @@
 ** any of them from a point to the light source
 */
 
-double ft_ligth(t_scene *scene, t_coord normal, t_coord point,t_coord view, int s)
+double ft_ligth(t_scene *scene, t_distcolor cur_prop, int s)
 {
 double intense;
 int i;
@@ -35,7 +35,7 @@ else
 {
 	if (scene->lights[i]->type == 2)
 	{
-		vl=ft_substrv(scene->lights[i]->position, point);
+		vl=ft_substrv(scene->lights[i]->position, cur_prop.p);
 		r.tmax=1;
 	}
 	else
@@ -45,26 +45,26 @@ else
 		}
 
 //check shadow  проходим по всем обьектам и проверяем пересекается ли с ними луч от точки до источника света
-	x = ft_findnearobj(scene, point, vl, r);  //проверяем пересекается ли луч point, vl с каким-либо обьектом сферы
+	x = ft_findnearobj(scene, cur_prop.p, vl, r);  //проверяем пересекается ли луч point, vl с каким-либо обьектом сферы
 
 	if (x.sol == 0)
 	{
         
-        med = ft_mult_num_vector(1/ft_lengthv(view),view);
-        if (ft_dotprod(med, normal)>=0)
+        med = ft_mult_num_vector(1/ft_lengthv(cur_prop.view),cur_prop.view);
+        if (ft_dotprod(med, cur_prop.normal)>=0)
         {
         
-		m = ft_dotprod(vl, normal);
+		m = ft_dotprod(vl, cur_prop.normal);
 		if (m > 0 )
-		intense += scene->lights[i]->intens * m / (ft_lengthv(normal) * ft_lengthv(vl));
+		intense += scene->lights[i]->intens * m / (ft_lengthv(cur_prop.normal) * ft_lengthv(vl));
 
 		if (s!= -1)
 		{
-			R= ft_substrv(ft_mult_num_vector(2 * m,normal),vl);
-			rv = ft_dotprod(R, view);
+			R= ft_substrv(ft_mult_num_vector(2 * m,cur_prop.normal),vl);
+			rv = ft_dotprod(R, cur_prop.view);
 			if (rv > 0)
 			{
-				intense += scene->lights[i]->intens * (pow (rv/(ft_lengthv(R)*ft_lengthv(view)) , s));
+				intense += scene->lights[i]->intens * (pow (rv/(ft_lengthv(R)*ft_lengthv(cur_prop.view)) , s));
 			}
 		}
         }

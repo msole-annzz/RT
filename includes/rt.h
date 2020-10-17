@@ -52,7 +52,7 @@ t_corsol	ft_intersect_plane(t_scene *scene, t_coord o, t_coord c, t_restr r);
 t_corsol	ft_intersect_paraboloid(t_scene *scene, t_coord o, t_coord c, t_restr r);
 void		*ft_traceray(void *thread_data);
 t_distcolor     ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_distcolor cur_prop);
-double ft_ligth(t_scene *scene, t_coord normal, t_coord point,t_coord view, int s);
+double ft_ligth(t_scene *scene, t_distcolor cur_prop, int s);
 void		ft_put_pixel(t_scene *scene, int i, int j, t_distcolor cur_prop);
 t_distcolor     ft_changecolor(t_scene *scene, t_color color, double deep);
 t_distcolor     ft_initcolor(t_scene *scene);
