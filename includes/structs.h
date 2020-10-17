@@ -142,6 +142,7 @@ typedef struct	s_distcolor
 	t_coord		normal;
 	t_coord		p;
 	t_coord		view;
+  //  t_coord     cur_point;  //point
 }				t_distcolor;
 
 /*
@@ -189,8 +190,8 @@ typedef struct	s_scene
 	t_camera	camera;
 	t_object	**object;
 	t_light		**lights;
-	t_coord		cur_point;
-	t_distcolor	cur_prop;
+//	t_coord		cur_point;
+//	t_distcolor	cur_prop;
 	t_color		bkg_color;
 	t_angle		angle;
 	double		d;

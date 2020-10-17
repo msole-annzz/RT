@@ -5,16 +5,17 @@ int		ft_mouse(int mouse, int x, int y, t_scene *scene)
 {
 	t_corsol	t;
 	t_restr		r;
+	t_coord		cur_point;
 	scene->mouse->is_press = 0;
 	if (mouse == 1)
 	{
 		scene->mouse->is_press = 1;
 		scene->mouse->x = x;
 		scene->mouse->y = y;
-		ft_conv2to3(scene, x - WIN_WIDTH / 2, y - WIN_HEIGHT / 2);
+		cur_point=ft_conv2to3(scene, x - WIN_WIDTH / 2, y - WIN_HEIGHT / 2);
 		r.tmin = 1;
 		r.tmax = 100000;
-		t = ft_findnearobj(scene, scene->camera.place, scene->cur_point, r);
+		t = ft_findnearobj(scene, scene->camera.place, cur_point, r);
 		if (t.issol == 1)
 			scene->mouse->num_obj = t.kobj;
 	}

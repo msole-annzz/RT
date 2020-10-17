@@ -1,13 +1,13 @@
 
 #include "../includes/rt.h"
 
-void	sepia(t_scene *scene, int p)
+void	sepia(t_scene *scene, int p, t_distcolor cur_prop)
 {
 	int		rgb[3];
 	int		rgb_start[3];
-	rgb_start[0] = scene->cur_prop.color.r;
-	rgb_start[1] = scene->cur_prop.color.g;
-	rgb_start[2] = scene->cur_prop.color.b;
+	rgb_start[0] = cur_prop.color.r;
+	rgb_start[1] = cur_prop.color.g;
+	rgb_start[2] = cur_prop.color.b;
 
 	if ((rgb[0] = (rgb_start[0] * .393) + (rgb_start[1] * .769) + (rgb_start[2] * .189)) > 255)
 		rgb[0]= 255;
@@ -97,7 +97,7 @@ t_color	anaglyph(t_scene *scene, int p1, int p2, int p)
 }
 */
 
-void    ft_put_pixel(t_scene *scene, int i, int j)
+void    ft_put_pixel(t_scene *scene, int i, int j, t_distcolor cur_prop)
 {
     int p;
     int red;
@@ -110,14 +110,14 @@ void    ft_put_pixel(t_scene *scene, int i, int j)
     {
 
 
-    red = scene->cur_prop.color.r;
-    green = scene->cur_prop.color.g;
-    blue = scene->cur_prop.color.b;
+    red = cur_prop.color.r;
+    green = cur_prop.color.g;
+    blue = cur_prop.color.b;
 
     scene->image.data[p] = ((red << 16) | (green << 8) | blue);
 	}
     if (scene->color_schema == 1)
-      sepia(scene, p);
+      sepia(scene, p, cur_prop);
 	//if (scene->color_schema == 2)
       //anaglyph (scene, p);
 
@@ -144,30 +144,33 @@ void    ft_put_pixel(t_scene *scene, int i, int j)
 
 }*/
 
-void	ft_changecolor(t_scene *scene, t_color color, double deep)
+t_distcolor	ft_changecolor(t_scene *scene, t_color color, double deep)
 {
+t_distcolor	cur_prop;
 	if (deep > 1)
 		deep = 1;
-	if ((scene->cur_prop.color.r = color.r * deep) > 255)
-		scene->cur_prop.color.r = 255;
+	if ((cur_prop.color.r = color.r * deep) > 255)
+		cur_prop.color.r = 255;
 	else
-		scene->cur_prop.color.r = color.r * deep;
-	if ((scene->cur_prop.color.g = color.g * deep) > 255)
-		scene->cur_prop.color.g = 255;
+		cur_prop.color.r = color.r * deep;
+	if ((cur_prop.color.g = color.g * deep) > 255)
+		cur_prop.color.g = 255;
 	else
-		scene->cur_prop.color.g = color.g * deep;
+		cur_prop.color.g = color.g * deep;
 
-	if ((scene->cur_prop.color.b = color.b * deep) > 255)
-		scene->cur_prop.color.b = 255;
+	if ((cur_prop.color.b = color.b * deep) > 255)
+		cur_prop.color.b = 255;
 	else
-		scene->cur_prop.color.b = color.b * deep;
-
+		cur_prop.color.b = color.b * deep;
+return(cur_prop);
 }
 
 
-void	ft_initcolor(t_scene *scene)
+t_distcolor	ft_initcolor(t_scene *scene)
 {
-	scene->cur_prop.color.r = scene->bkg_color.r;
-	scene->cur_prop.color.g = scene->bkg_color.g;
-	scene->cur_prop.color.b = scene->bkg_color.b;
+t_distcolor cur_prop;
+	cur_prop.color.r = scene->bkg_color.r;
+	cur_prop.color.g = scene->bkg_color.g;
+	cur_prop.color.b = scene->bkg_color.b;
+return(cur_prop);
 }

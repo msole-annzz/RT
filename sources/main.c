@@ -48,14 +48,16 @@ t_corsol	ft_findnearobj(t_scene *scene, t_coord o, t_coord c, t_restr r)
 	return (t);
 }
 
-void		ft_conv2to3(t_scene *scene, int x, int y)
+t_coord		ft_conv2to3(t_scene *scene, int x, int y)
 {
-	scene->cur_point.x = x * (double)VIEW_WIDTH / WIN_WIDTH;
-	scene->cur_point.y = -y * (double)VIEW_HEIGHT / WIN_HEIGHT;
-	scene->cur_point.z = scene->d;
-	scene->cur_point = ft_rotatex(scene->angle, scene->cur_point);
-	scene->cur_point = ft_rotatey(scene->angle, scene->cur_point);
-	scene->cur_point = ft_rotatez(scene->angle, scene->cur_point);
+t_coord cur_point;
+	cur_point.x = x * (double)VIEW_WIDTH / WIN_WIDTH;
+	cur_point.y = -y * (double)VIEW_HEIGHT / WIN_HEIGHT;
+	cur_point.z = scene->d;
+	cur_point = ft_rotatex(scene->angle, cur_point);
+	cur_point = ft_rotatey(scene->angle, cur_point);
+	cur_point = ft_rotatez(scene->angle, cur_point);
+return(cur_point);
 }
 
 /*
