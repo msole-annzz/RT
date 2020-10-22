@@ -51,6 +51,7 @@ if (object.type == e_cone)
 normal=ft_getnorm_cone(object, crossp);
 if (object.type == e_paraboloid)
 normal=ft_getnorm_paraboloid(object, crossp);
+normal = ft_mult_num_vector(1 / ft_lengthv(normal), normal);
 return (normal);
 }
 
@@ -154,7 +155,7 @@ t_coord	ft_getnorm_paraboloid(t_object object, t_coord crossp)
 	v = ft_mult_num_vector(1 / ft_lengthv(object.vectorperp), object.vectorperp);
 	m = ft_dotprod(ft_substrv(crossp, object.center), v);
 	normal = ft_substrv(ft_substrv(crossp, object.center), ft_mult_num_vector((m + object.k_paraboloid), v));
-	normal = ft_norm_vector(normal);
+	//normal = ft_norm_vector(normal);
 	return(normal);
 }
 /*

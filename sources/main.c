@@ -4,9 +4,9 @@
 void		ft_init_scene(t_scene *scene)
 {
 	scene->d = 1;
-	scene->bkg_color.r = 0;
-	scene->bkg_color.g = 0;
-	scene->bkg_color.b = 0;
+	scene->bkg_color.r = 255;
+	scene->bkg_color.g =255;
+	scene->bkg_color.b = 255;
 	scene->angle.x = 0;
 	scene->angle.y = 0;
 	scene->angle.z = 0;

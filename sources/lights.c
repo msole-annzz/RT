@@ -54,15 +54,16 @@ else
         if (ft_dotprod(med, cur_prop.normal)>=0)
         {
         
-		m = ft_dotprod(vl, cur_prop.normal);
+		m = ft_dotprod(vl, cur_prop.normal);//скалярное произведение луча света и нормали
 		if (m > 0 )
 		intense += scene->lights[i]->intens * m / (ft_lengthv(cur_prop.normal) * ft_lengthv(vl));
 
 		if (s!= -1)
 		{
 	//		R=ft_reflect_ray(vl, cur_prop.normal);
-			R= ft_substrv(ft_mult_num_vector(2 * m,cur_prop.normal),vl);
-			rv = ft_dotprod(R, cur_prop.view);
+			R = ft_substrv(ft_mult_num_vector(ft_dotprod(cur_prop.normal, vl),ft_mult_num_vector(2, cur_prop.normal) ), vl);
+			//R= ft_substrv(ft_mult_num_vector(2 * m,cur_prop.normal),vl);
+			rv = ft_dotprod(R, cur_prop.view);// rv - предподожително cos а , значит пробу
 			if (rv > 0)
 			{
 				intense += scene->lights[i]->intens * (pow (rv/(ft_lengthv(R)*ft_lengthv(cur_prop.view)) , s));
