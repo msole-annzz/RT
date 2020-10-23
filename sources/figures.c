@@ -15,7 +15,7 @@ t_quadreq	ft_sfera(t_coord origin, t_coord direction, t_object object)
 	return (ft_quadrsolution(a, b, c));
 }
 
-t_quadreq ft_hemispere(t_coord origin, t_coord direction, t_object object)
+/*t_quadreq ft_hemispere(t_coord origin, t_coord direction, t_object object)
 {
 t_object sfera;
 t_object plane;
@@ -27,7 +27,7 @@ plane.vectorperp = object.
 plane.center = object.center;
 
 }
-
+*/
 
 t_quadreq	ft_cylinder(t_coord origin, t_coord direction, t_object object)
 {

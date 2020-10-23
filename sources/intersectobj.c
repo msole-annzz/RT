@@ -46,10 +46,10 @@ t_corsol	ft_intersect_plane(t_scene *scene, t_coord o, t_coord c, t_restr r)
 	return (ft_get_correct_solution(t, r, scene->current_object));
 }
 
-t_corsol        ft_intersect_hemisphere(t_scene *scene, t_coord o, t_coord c, t_restr r)
+/*t_corsol        ft_intersect_hemisphere(t_scene *scene, t_coord o, t_coord c, t_restr r)
 {
         t_quadreq t;
 
         t = ft_hemispere(o, c, *scene->object[scene->current_object]);
         return (ft_get_correct_solution(t, r, scene->current_object));
-}
+}*/

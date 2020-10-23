@@ -60,8 +60,8 @@ else
 
 		if (s!= -1)
 		{
-	//		R=ft_reflect_ray( cur_prop.normal,vl);
-			R = ft_substrv(ft_mult_num_vector(ft_dotprod(cur_prop.normal, vl),ft_mult_num_vector(2, cur_prop.normal) ), vl);
+			R=ft_reflect_ray( cur_prop.normal,vl);
+//			R = ft_substrv(ft_mult_num_vector(ft_dotprod(cur_prop.normal, vl),ft_mult_num_vector(2, cur_prop.normal) ), vl);
 	//		R= ft_substrv(ft_mult_num_vector(2 * m,cur_prop.normal),vl);
 			rv = ft_dotprod(R, cur_prop.view);// rv - предподожително cos а , значит пробу
 			if (rv > 0)

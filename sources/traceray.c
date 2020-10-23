@@ -21,7 +21,7 @@ scene = (t_scene *)(thread_data);
 		while (i < scene->thrmaxwidth)
 		{
 			cur_point=ft_conv2to3(scene, i - WIN_WIDTH / 2, j - WIN_HEIGHT / 2);
-			local_color=ft_intersect(scene, scene->camera.place, cur_point, r, 3);
+			local_color=ft_intersect(scene, scene->camera.place, cur_point, r, 1);
 			ft_put_pixel(scene, i, j, ft_clamp(local_color));
 			i++;
 		}
@@ -31,7 +31,14 @@ scene = (t_scene *)(thread_data);
 	return (thread_data);
 }
 
-t_coord ft_getnormals(t_object object, t_coord crossp)
+t_coord         check_normal(t_coord start, t_coord normal)
+{
+        if (ft_dotprod(start, normal) > 0)
+                normal = ft_mult_num_vector(-1,normal);
+return(normal);
+}
+
+t_coord ft_getnormals(t_coord end_point,t_object object, t_coord crossp)
 {
 t_coord normal;
 double m;
@@ -52,18 +59,28 @@ normal=ft_getnorm_cone(object, crossp);
 if (object.type == e_paraboloid)
 normal=ft_getnorm_paraboloid(object, crossp);
 normal = ft_mult_num_vector(1 / ft_lengthv(normal), normal);
+normal=check_normal(end_point, normal);
 return (normal);
 }
+
 
 t_coord ft_reflect_ray(t_coord v1, t_coord normal)
 {
 t_coord refl_ray;
 refl_ray= ft_mult_num_vector(2*ft_dotprod(v1, normal), normal);
-refl_ray=ft_substrv(refl_ray, v1);
+refl_ray=ft_substrv( v1,refl_ray);
 return(refl_ray);
-//return(ft_substrv(ft_mult_num_vector(ft_dotprod(normal, v1),ft_mult_num_vector(2, normal) ), v1));
-//return(ft_substrv(ft_mult_num_vector(2*ft_dotprod(v1, normal), normal), v1));
 }
+
+
+
+t_coord ft_refract_ray(t_coord v1, t_coord normal)
+{
+t_coord refr_ray;
+refr_ray= ft_mult_num_vector(10, v1);
+return(refr_ray);
+}
+
 
 //[200~ft_substrv(ft_mult_num_vector(ft_dotprod(cur_prop.normal, vl),ft_mult_num_vector(2, cur_prop.normal) ), vl);
 
@@ -78,8 +95,10 @@ t_color	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_r
 	t_coord reflected_ray;
 	t_color local_color;
 	t_color reflected_color;
-t_restr         r1;
-        
+	t_restr         r1;
+        t_coord refracted_ray;
+	t_color refracted_color;
+
       r1.tmin = 0.0001;
       r1.tmax = 100000;
 
@@ -91,7 +110,7 @@ if (t.issol == 1)
 	{
 		cur_prop.p = ft_add_vector(start_point, ft_mult_num_vector(t.sol, \
 		end_point));
-		cur_prop.normal=ft_getnormals(*scene->object[t.kobj], cur_prop.p);
+		cur_prop.normal=ft_getnormals(end_point,*scene->object[t.kobj], cur_prop.p);
 		cur_prop.view = ft_mult_num_vector(-1,end_point);
 		deep = 0;
 		if (scene->object[t.kobj]->specular)
@@ -99,9 +118,9 @@ if (t.issol == 1)
 		local_color=ft_changecolor(scene, scene->object[t.kobj]->color, deep);
 		if (scene->object[t.kobj]->reflection <= 0 || recurs <= 0)
     			return (local_color);	
+		else
 		reflected_ray = ft_reflect_ray(cur_prop.normal,cur_prop.p);
-//		reflected_ray = ft_reflect_ray(cur_prop.p,cur_prop.normal);  
-		reflected_color = ft_intersect(scene,cur_prop.view, reflected_ray, r1, recurs - 1);
+	reflected_color = ft_intersect(scene,cur_prop.view, reflected_ray, r1, recurs - 1);
 
  return (ft_add2color(ft_mult_num_color(1 - scene->object[t.kobj]->reflection, local_color),
 	     ft_mult_num_color(scene->object[t.kobj]->reflection, reflected_color)));
