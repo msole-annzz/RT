@@ -54,7 +54,7 @@
               "axis_angle":[0,1,6],
               "k_paraboloid":0.1,
               "specularity":1000,
-              "reflection":0.5,
+              "reflection":0.6,
               "refraction": 15,
               "high": -3,
               "max": 6,

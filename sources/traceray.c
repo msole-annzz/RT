@@ -57,8 +57,16 @@ return (normal);
 
 t_coord ft_reflect_ray(t_coord v1, t_coord normal)
 {
-return(ft_substrv(ft_mult_num_vector(2*ft_dotprod(v1, normal), normal), v1));
+t_coord refl_ray;
+refl_ray= ft_mult_num_vector(2*ft_dotprod(v1, normal), normal);
+refl_ray=ft_substrv(refl_ray, v1);
+return(refl_ray);
+//return(ft_substrv(ft_mult_num_vector(ft_dotprod(normal, v1),ft_mult_num_vector(2, normal) ), v1));
+//return(ft_substrv(ft_mult_num_vector(2*ft_dotprod(v1, normal), normal), v1));
 }
+
+//[200~ft_substrv(ft_mult_num_vector(ft_dotprod(cur_prop.normal, vl),ft_mult_num_vector(2, cur_prop.normal) ), vl);
+
 
 
 t_color	ft_intersect(t_scene *scene, t_coord start_point, t_coord end_point, t_restr r, int recurs)
@@ -91,8 +99,9 @@ if (t.issol == 1)
 		local_color=ft_changecolor(scene, scene->object[t.kobj]->color, deep);
 		if (scene->object[t.kobj]->reflection <= 0 || recurs <= 0)
     			return (local_color);	
-		reflected_ray = ft_reflect_ray(cur_prop.p, cur_prop.normal);
-  		reflected_color = ft_intersect(scene,cur_prop.view, reflected_ray, r1, recurs - 1);
+		reflected_ray = ft_reflect_ray(cur_prop.normal,cur_prop.p);
+//		reflected_ray = ft_reflect_ray(cur_prop.p,cur_prop.normal);  
+		reflected_color = ft_intersect(scene,cur_prop.view, reflected_ray, r1, recurs - 1);
 
  return (ft_add2color(ft_mult_num_color(1 - scene->object[t.kobj]->reflection, local_color),
 	     ft_mult_num_color(scene->object[t.kobj]->reflection, reflected_color)));
